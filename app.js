@@ -1,5 +1,4 @@
 const express = require('express');
-const cool = require('cool-ascii-faces')
 const mongoose = require('mongoose');
 var cors = require('cors')
 const customers = require('./routes/customer');
