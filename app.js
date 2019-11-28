@@ -45,7 +45,9 @@ mongoose.connect('mongodb+srv://Abhinash:16may1995@cluster0-mngqu.mongodb.net/te
   app.use('/api/procurestatus', procurestatus);
   app.use('/api/vehicle', megaFile);
 
-  app.use('/cool', faq)
+  app.get('/', (req, res)=>{
+    res.send('rakesh')
+  })
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
