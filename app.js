@@ -46,7 +46,7 @@ mongoose.connect('mongodb+srv://Abhinash:16may1995@cluster0-mngqu.mongodb.net/te
   app.use('/api/vehicle', megaFile);
 
   app.get('/', (req, res)=>{
-    res.send('rakesh')
+    res.send('you are not authorized to view this page')
   })
 const port = process.env.PORT || 3000;
 
