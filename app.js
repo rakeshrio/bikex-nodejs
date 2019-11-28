@@ -45,9 +45,6 @@ mongoose.connect('mongodb+srv://Abhinash:16may1995@cluster0-mngqu.mongodb.net/te
   app.use('/api/centres', centres);
   app.use('/api/procurestatus', procurestatus);
   app.use('/api/vehicle', megaFile);
-  app.get('/', async (req, res) => {
-    res.send('you are not authorized..')
-  })
 
   app.use('/cool', faq)
 const port = process.env.PORT || 3000;
