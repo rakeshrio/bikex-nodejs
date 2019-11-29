@@ -75,6 +75,12 @@ router.get('/', async (req, res) => {
     res.send(modal);
 });
 
+router.get('/:id', async (req, res) => {
+  const modal = await Modals.find({'_id': req.params.id});
+  res.send(modal);
+});
+
+
 router.put('/:id', async (req, res) => {
   console.log(req.body.updated)
   const { error } = validate(req.body); 
