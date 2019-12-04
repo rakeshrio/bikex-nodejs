@@ -13,6 +13,7 @@ const standard = require('./routes/standardroutes');
 const premium = require('./routes/premiumroutes');
 const faq = require('./routes/faq');
 const procurestatus = require('./routes/status');
+const purchase = require('./routes/purchases')
 const centres = require('./routes/centre')
 const uploadStatus = require('./routes/uploadstatus')
 const fetchVehicle = require('./routes/fetchdata')
@@ -42,6 +43,7 @@ mongoose.connect('mongodb+srv://Abhinash:16may1995@cluster0-mngqu.mongodb.net/te
   app.use('/api/premium', premium);
   app.use('/api/faq', faq);
   app.use('/api/centres', centres);
+  app.use('/api/purchases', purchase);
   app.use('/api/procurestatus', procurestatus);
   app.use('/api/vehicle', megaFile);
 
