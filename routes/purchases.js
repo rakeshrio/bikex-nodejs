@@ -38,19 +38,15 @@ router.post('/', async (req, res) => {
   });
 
   router.put('/:id', async (req, res) => {
-    if(req.body.status == 1){
       const purchase = await Purchase.findByIdAndUpdate(req.params.id,
         { 
             razorpay_order_id:req.body.razorpay_order_id,
             razorpay_payment_id:req.body.razorpay_payment_id,
             razorpay_signature:req.body.razorpay_signature,
-
+            payment_status:req.body.payment_status
         }, { new: false });
-    
       if (!purchase) return res.status(404).send('The purchase with the given ID was not found.');
-      
       res.send(purchase);
-    }
 })
   router.get('/:id', async (req, res) => {
     const purchase = await Purchase.findById(req.params.id);
