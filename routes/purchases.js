@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
                 payment_status:0
             });
             purchase = await purchase.save();
-            res.send({"err": 0, "purchase": purchase});
+            res.send( purchase);
            }else{
             res.send({"err": 1, "msg":"The vehicle you are looking is unavailable."}); 
            }
