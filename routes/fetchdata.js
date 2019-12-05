@@ -18,13 +18,13 @@ router.get('/under-refurbish', async (req, res) => {
 });
 
 router.get('/instock-vehicle', async (req, res) => {
-    const procured = await Procured.find({"status":{ $in: [3, 4]}} );
+    const procured = await Procured.find({"status":2});
    setTimeout(()=>{
     res.send(procured);
    })
 });
 router.get('/live-vehicle', async (req, res) => {
-    const procured = await Procured.find({"status":3});
+    const procured = await Procured.find({"status":{ $in: [3, 4]}});
    setTimeout(()=>{
     res.send(procured);
    },1501)
