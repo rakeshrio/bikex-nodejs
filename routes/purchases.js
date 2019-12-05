@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
 
     const purchase_history = await Purchase.find({"vehicle_id":req.body.vehicle_id});
-           if(purchase_history.length == 0){
+           if(purchase_history.length == 0 || purchase_history.payment_status == 0){
             let purchase = new Purchase({
                 customer_id:req.body.customer_id,
                 vehicle_id:req.body.vehicle_id,
@@ -27,9 +27,9 @@ router.post('/', async (req, res) => {
                 payment_status:0
             });
             purchase = await purchase.save();
-            res.send( purchase);
+            res.send(purchase);
            }else{
-            res.send({"err": 1, "msg":"The vehicle you are looking is unavailable."}); 
+            res.send({err: 1, "msg":"The vehicle you are looking is unavailable."}); 
            }
   });
   router.get('/', async (req, res) => {

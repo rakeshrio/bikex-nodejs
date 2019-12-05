@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const shortid = require('shortid');
+
 
 const customerSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    default: shortid.generate
+    },
     firstname:String,
     lastname:String,
     phone: Number,
