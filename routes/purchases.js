@@ -6,12 +6,33 @@ var multer  = require('multer')
  
 
 router.post('/', async (req, res) => {
-    const { error } = validate(req.body); 
-    if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
-
-    const purchase_history = await Purchase.find({"vehicle_id":req.body.vehicle_id});
-           if(purchase_history.length == 0 || purchase_history.payment_status == 0){
-            let purchase = new Purchase({
+  const { error } = validate(req.body); 
+  if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+  console.log(req.body.vehicle_id)
+  const purchase_history = await Purchase.find({"vehicle_id":req.body.vehicle_id});
+    console.log(purchase_history)
+      if(purchase_history.length == 0){
+        let purchase = new Purchase({
+            customer_id:req.body.customer_id,
+            vehicle_id:req.body.vehicle_id,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            email: req.body.email,
+            amount:req.body.amount,
+            address1:req.body.address1,
+            address2:req.body.address2,
+            town:req.body.town,
+            state:req.body.state,
+            postalcode: req.body.postalcode,
+            payment_status:0
+        });
+        purchase = await purchase.save();
+        res.send(purchase);
+       }else if(purchase_history.length > 0){
+          for(var i in purchase_history){
+            if(purchase_history[i].payment_status == 0){
+              let purchase = new Purchase({
                 customer_id:req.body.customer_id,
                 vehicle_id:req.body.vehicle_id,
                 firstname: req.body.firstname,
@@ -28,9 +49,14 @@ router.post('/', async (req, res) => {
             });
             purchase = await purchase.save();
             res.send(purchase);
-           }else{
-            res.send({err: 1, "msg":"The vehicle you are looking is unavailable."}); 
-           }
+            }else{
+              res.send({err: 1, "msg":"The vehicle you are looking is unavailable."}); 
+            }
+          }
+       }else{
+        res.send({err: 1, "msg":"The vehicle you are looking is unavailable."}); 
+       }
+      
   });
   router.get('/', async (req, res) => {
     const purchase = await Purchase.find();
