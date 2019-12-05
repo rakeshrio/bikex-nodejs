@@ -40,13 +40,25 @@ else if(req.body.status == 4){
   const procured = await Procured.findByIdAndUpdate(req.params.id,
     { 
         status:req.body.status,
+        booked_date:req.body.date
+    }, { new: false });
+
+  if (!procured) return res.status(404).send('The procured with the given ID was not found.');
+  
+  res.send(procured);
+}
+else if(req.body.status == 5){
+  const procured = await Procured.findByIdAndUpdate(req.params.id,
+    { 
+        status:req.body.status,
         sold_date:req.body.date
     }, { new: false });
 
   if (!procured) return res.status(404).send('The procured with the given ID was not found.');
   
   res.send(procured);
-}else if(req.body.status == 0){
+}
+else if(req.body.status == 0){
   const procured = await Procured.findByIdAndUpdate(req.params.id,
     { 
         status:req.body.status,

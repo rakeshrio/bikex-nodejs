@@ -36,6 +36,7 @@ const procurementSchema = new mongoose.Schema({
     refurbishment_done:Date,
     instock_date:Date,
     live_date:Date,
+    booked_date:Date,
     sold_date:Date,
     delivered:Date,
     date: { type:Date, default:Date.now},
@@ -78,6 +79,7 @@ function validateProcurement(procurement) {
     instock_date: Joi.date(),
     live_date: Joi.date(),
     sold_date: Joi.date(),
+    booked_date: Joi.date(),
     delivered: Joi.date(),
     updated: Joi.date()
     };
