@@ -24,6 +24,8 @@ router.post('/', async (req, res) => {
                 address1:req.body.address1,
                 address2:req.body.address2,
                 town:req.body.town,
+                image:req.body.image,
+                model:req.body.model,
                 state:req.body.state,
                 postalcode: req.body.postalcode,
                 payment_status:0
