@@ -43,7 +43,7 @@ const procurementSchema = new mongoose.Schema({
     date: { type:Date, default:Date.now},
     updated: { type:Date, default:Date.now}
 });
-const Procured = mongoose.model('vehicle_list', procurementSchema)
+const Procured = mongoose.model('procured_list', procurementSchema)
 
 function validateProcurement(procurement) {
     const schema = {

@@ -31,7 +31,7 @@ const modalsSchema = new mongoose.Schema({
     date: { type:Date, default:Date.now},
     updated: { type:Date, default:Date.now}
 });
-const Modals = mongoose.model('models', modalsSchema)
+const Modals = mongoose.model('modals', modalsSchema)
 
 function modalsValidate(modal) {
     const schema = {
