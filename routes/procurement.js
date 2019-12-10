@@ -45,6 +45,7 @@ router.post('/', async (req, res) => {
             vehicle_id : Number(ids)+1,
             vehicle_number:req.body.vehicle_number,
             model_id:req.body.model_id,
+            type:req.body.type,
             manufacture_year:req.body.manufacture_year,
             color:req.body.color,
             fines: req.body.fines,
