@@ -3,19 +3,6 @@ const express = require('express');
 const app=express();
 const {Vehicles, validate} = require('../models/vehicles')
 const router = express.Router();
-var multer  = require('multer')
-let DIR='./attach';
-//for file upload with multer
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null,DIR)
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+ '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-  })
-let upload = multer({ storage: storage }).single('Image');
-app.use('/myimages',express.static('attach'));
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 

@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
           const id = _.findLast(procured_list, function(n) {
             return n.vehicle_id;
           });
-          if(!id){ids = 100}
+          if(!id){ids = 10001}
           else{ids = id.vehicle_id}
 
           let procured = new Procured({
