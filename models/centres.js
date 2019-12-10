@@ -6,7 +6,7 @@ const centreSchema = new mongoose.Schema({
     phone:Number,
     address: String,
 });
-const Centres = mongoose.model('centre', centreSchema)
+const Centres = mongoose.model('centres', centreSchema)
 
 function validatecentre(centre) {
     const schema = {

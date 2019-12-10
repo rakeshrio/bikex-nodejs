@@ -105,6 +105,7 @@ router.put('/:id', async (req, res) => {
       make:req.body.make,
       modal:req.body.modal,
       manufacture_year:req.body.manufacture_year,
+      type:req.body.type,
       color:req.body.color,
       fines: req.body.fines,
       source: req.body.source,

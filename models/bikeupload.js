@@ -6,7 +6,7 @@ const uploadSchema = new mongoose.Schema({
     images:Array,
     path: String
 });
-const VehicleUploads = mongoose.model('VehicleUploads', uploadSchema)
+const VehicleUploads = mongoose.model('vehicle_Images_Uploads', uploadSchema)
 
 function validateUploads(uploadcheck) {
     const schema = {
