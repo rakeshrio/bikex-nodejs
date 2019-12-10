@@ -57,7 +57,7 @@ function modalsValidate(modal) {
     drive_type: Joi.string().min(1).max(100),
     console: Joi.string().min(1).max(100),
     kerb_weight: Joi.string().min(1).max(100),
-    comments: Joi.string().min(1).max(100),
+    comments: Joi.string().min(1).max(1000),
     updated: Joi.date()
     };
   
