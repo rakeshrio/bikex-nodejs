@@ -22,12 +22,12 @@ const megaFile = require('./routes/megaJson')
 const app = express();
 app.use(express.json());
 app.use(cors())
-app.use('/myImages',express.static('attach'));
+// app.use('/myImages',express.static('attach'));
 
 
-mongoose.connect('mongodb+srv://Abhinash:16may1995@cluster0-mngqu.mongodb.net/test?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test?retryWrites=true&w=majority')
   .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...'));
+  .catch(err => console.error('Could not connect to MongoDB...', err));
 
   app.use('/api/customers', customers);
   // app.use('/api/vehicles', vehicles);
