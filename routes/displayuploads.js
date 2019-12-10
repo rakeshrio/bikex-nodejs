@@ -3,28 +3,41 @@ const express = require('express');
 const router = express.Router();
 const multer=require('multer');
 const app = express();
+
+const aws = require( 'aws-sdk' );
+const multerS3 = require( 'multer-s3' );
+const path = require( 'path' );
+
 const bodyParser=require('body-parser');
 app.use(bodyParser.json());
-let DIR='./attach/bikex-Display-Images';
 
-//for file upload with multer
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null,DIR)
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+ '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-  }) 
-let upload = multer({ storage: storage }).single('Image', 10);
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAZ6FEPOPCLJN2IKEG',
+  secretAccessKey: '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',
+  Bucket: 'bikex-image-bucket'
+ });
+
+ const store = multerS3({
+  s3: s3,
+  bucket: 'bikex-image-bucket',
+  acl: 'public-read',
+  key: function (req, file, cb) {
+   cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+  }
+ })
+
+const upload = multer({
+  storage: store,
+ }).single('Image')
 
 router.post('/',(req, res) => {
-
   upload(req,res,function(err)
     {
 
       if(err)
-      {res.json({'err':1,'msg':'Unexpected error!', err})}
+      {
+        res.json( { error: err } );
+      }
       else
         {
         const { error } = validate(req.body); 
@@ -32,8 +45,8 @@ router.post('/',(req, res) => {
             
         let vehicledisplayUploads = new VehicledisplayUploads({
               vehicle_id: req.body.vehicle_id,
-              images:req.file.filename,
-              path:req.file.filename
+              images:req.file.key,
+              path:req.file.location
               });
 
         vehicledisplayUploads = vehicledisplayUploads.save(); //saving the banner
@@ -59,7 +72,6 @@ router.get('/', async (req, res) => {
   router.put('/:id', async (req, res) => {
     upload(req,res,async function(err)
     {
-      console.log(req.file.filename)
       if(err)
       {res.json({'err':1,'msg':'Unexpected error!', err})}
       else
@@ -67,8 +79,8 @@ router.get('/', async (req, res) => {
 
         const vehicledisplayUploads = await VehicledisplayUploads.findByIdAndUpdate(req.params.id,
           { 
-            images:req.file.filename,
-            path:req.file.filename
+            images:req.file.key,
+            path:req.file.location
           }, { new: false });
       
         if (!vehicledisplayUploads) return res.status(404).send('The vehicle with the given ID was not found.');

@@ -5,18 +5,31 @@ const multer=require('multer');
 const app = express();
 const bodyParser=require('body-parser');
 app.use(bodyParser.json());
-let DIR='./attach/bikexImages';
 
-//for file upload with multer
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null,DIR)
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+ '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-  }) 
-let upload = multer({ storage: storage }).array('Image', 10);
+
+const aws = require( 'aws-sdk' );
+const multerS3 = require( 'multer-s3' );
+const path = require( 'path' );
+
+
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAZ6FEPOPCLJN2IKEG',
+  secretAccessKey: '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',
+  Bucket: 'bikex-image-bucket'
+ });
+
+ const store = multerS3({
+  s3: s3,
+  bucket: 'bikex-image-bucket',
+  acl: 'public-read',
+  key: function (req, file, cb) {
+   cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+  }
+ })
+
+const upload = multer({
+  storage: store,
+ }).array('Image', 20);
 
 router.post('/',(req, res) => {
 
@@ -25,7 +38,7 @@ router.post('/',(req, res) => {
     {
       var arr = []
       for (var i in req.files){
-       arr.push(req.files[i].filename)
+       arr.push(req.files[i].location)
       }
  console.log(req)
       if(err)
