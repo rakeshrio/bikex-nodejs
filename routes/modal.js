@@ -61,7 +61,9 @@ router.post('/', async (req, res) => {
             comments:req.body.comments,
             });           
         modal =  modal.save();
-        if(err){}
+        if(err){
+          res.json({'err':1,'msg':'Modal_error'})
+        }
           else
           {
           res.json({'err':0,'msg':'Procured', 'procured_list':modal})
