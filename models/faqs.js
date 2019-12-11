@@ -3,10 +3,6 @@ const Joi = require('joi');
 var uniqid = require('uniqid');
 
 const faqSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    default: uniqid('BX')
-    },
     question:String,
     answer: String,
 });

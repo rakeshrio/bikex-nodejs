@@ -10,12 +10,8 @@ router.put('/:id', async (req, res) => {
     { 
         imageUpload: req.body.status
     }, { new: false });
-
   if (!procured) return res.status(404).send('The procured with the given ID was not found.');
-  
   res.send(procured);
-
-
 });
 
 router.get('/pending-upload', async (req, res) => {
