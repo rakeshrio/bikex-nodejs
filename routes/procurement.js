@@ -96,39 +96,42 @@ router.get('/:id', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+  var documents = []
+      for (var i in req.files){
+       documents.push(req.files[i].filename)
+      }
   console.log(req.body.updated)
   const { error } = validate(req.body); 
   if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
   const procured = await Procured.findByIdAndUpdate(req.params.id,
     { 
       vehicle_number:req.body.vehicle_number,
-      make:req.body.make,
-      modal:req.body.modal,
-      manufacture_year:req.body.manufacture_year,
-      type:req.body.type,
-      color:req.body.color,
-      fines: req.body.fines,
-      source: req.body.source,
-      city: req.body.city,
-      pincode: req.body.pincode,
-      state: req.body.state,
-      address:req.body.address,
-      rc_card: req.body.rc_card,
-      insurance:req.body.insurance,
-      b_extract:req.body.b_extract,
-      hypothecation:req.body.hypothecation,
-      documents:document,
-      regn_no:req.body.regn_no,
-      chassis_no:req.body.chassis_no,
-      insurance_policy_number:req.body.insurance_policy_number,            
-      rc_start:req.body.rc_start,
-      rc_end:req.body.rc_end,
-      insurance_start:req.body.insurance_start,
-      insurance_end:req.body.insurance_end,
-      remarks: req.body.remarks,
-      procured_date: req.body.procured_date,
-      procured_price: req.body.procured_price,
-      selling_price: req.body.selling_price,
+            model_id:req.body.model_id,
+            type:req.body.type,
+            manufacture_year:req.body.manufacture_year,
+            color:req.body.color,
+            fines: req.body.fines,
+            source: req.body.source,
+            city: req.body.city,
+            pincode: req.body.pincode,
+            state: req.body.state,
+            address:req.body.address,
+            rc_card: req.body.rc_card,
+            insurance:req.body.insurance,
+            b_extract:req.body.b_extract,
+            hypothecation:req.body.hypothecation,
+            documents:documents,
+            regn_no:req.body.regn_no,
+            chassis_no:req.body.chassis_no,
+            insurance_policy_number:req.body.insurance_policy_number,            
+            rc_start:req.body.rc_start,
+            rc_end:req.body.rc_end,
+            insurance_start:req.body.insurance_start,
+            insurance_end:req.body.insurance_end,
+            remarks: req.body.remarks,
+            procured_date: req.body.procured_date,
+            procured_price: req.body.procured_price,
+            selling_price: req.body.selling_price,
       updated: req.body.updated
     }, { new: false });
 
