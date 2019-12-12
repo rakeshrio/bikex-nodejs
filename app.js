@@ -15,6 +15,7 @@ const faq = require('./routes/faq');
 const procurestatus = require('./routes/status');
 const purchase = require('./routes/purchases')
 const centres = require('./routes/centre')
+const sells = require('./routes/sell')
 const uploadStatus = require('./routes/uploadstatus')
 const fetchVehicle = require('./routes/fetchdata')
 const megaFile = require('./routes/megaJson')
@@ -42,6 +43,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/fetch/', fetchVehicle);
   app.use('/api/premium', premium);
   app.use('/api/faq', faq);
+  app.use('/api/sell', sells);
   app.use('/api/centres', centres);
   app.use('/api/purchases', purchase);
   app.use('/api/procurestatus', procurestatus);

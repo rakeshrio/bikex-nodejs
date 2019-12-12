@@ -82,6 +82,11 @@ router.get('/:id', async (req, res) => {
   res.send(modal);
 });
 
+router.get('/type/:id', async (req, res) => {
+  const modal = await Modals.find({'vehicle_type': req.params.id});
+  res.send(modal);
+});
+
 
 router.put('/:id', async (req, res) => {
   console.log(req.body.updated)
