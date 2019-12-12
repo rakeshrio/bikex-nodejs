@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
   var documents = []
       for (var i in req.files){
        documents.push(req.files[i].filename)
-      }
+      } 
   console.log(req.body.updated)
   const { error } = validate(req.body); 
   if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
