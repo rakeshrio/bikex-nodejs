@@ -103,7 +103,7 @@ router.put('/:id', async (req, res) => {
   console.log(req.body.updated)
   const { error } = validate(req.body); 
   if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
       vehicle_number:req.body.vehicle_number,
             model_id:req.body.model_id,
