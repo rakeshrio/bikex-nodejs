@@ -6,7 +6,7 @@ const app = express();
 
 router.put('/:id', async (req, res) => {
 if(req.body.status == 1){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
         refurbishment_received:req.body.date
@@ -16,7 +16,7 @@ if(req.body.status == 1){
   
   res.send(procured);
 }else if(req.body.status == 2){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
         instock_date:req.body.date
@@ -26,7 +26,7 @@ if(req.body.status == 1){
   
   res.send(procured);
 }else if(req.body.status == 3){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
         live_date:req.body.date
@@ -37,7 +37,7 @@ if(req.body.status == 1){
   res.send(procured);
 }
 else if(req.body.status == 4){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
         booked_date:req.body.date
@@ -48,7 +48,7 @@ else if(req.body.status == 4){
   res.send(procured);
 }
 else if(req.body.status == 5){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
         sold_date:req.body.date
@@ -59,7 +59,7 @@ else if(req.body.status == 5){
   res.send(procured);
 }
 else if(req.body.status == 0){
-  const procured = await Procured.findByIdAndUpdate(req.params.id,
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
     { 
         status:req.body.status,
     }, { new: false });
