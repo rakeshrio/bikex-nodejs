@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
                 address1:req.body.address1,
                 address2:req.body.address2,
                 town:req.body.town,
+                mode_of_payment:req.body.mode_of_payment,
                 image:req.body.image,
                 model:req.body.model,
                 state:req.body.state,
