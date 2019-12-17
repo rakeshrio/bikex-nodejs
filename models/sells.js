@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const sellSchema = new mongoose.Schema({
-    bike_name:String,
+
     make:String,
     model: String,
     engine_cc: String,
-    make_year: String,
+    manufacture_year: String,
     km_run: String,
     vehicle_no: String,
     name: String,
@@ -19,11 +19,10 @@ const Sell = mongoose.model('sells', sellSchema)
 
 function validateSell(sell) {
     const schema = {
-    bike_name: Joi.string().min(1).max(50).required(),
     make:Joi.string().min(1).max(50).required(),
     model: Joi.string().min(1).max(50).required(),
     engine_cc: Joi.string().min(1).max(100).required(),
-    make_year: Joi.string().min(1).required(),
+    manufacture_year: Joi.string().min(1).required(),
     km_run: Joi.string().min(1).max(50).required(),
     vehicle_no: Joi.string().min(1).max(50).required(),
     name: Joi.string().min(1).max(50).required(),
