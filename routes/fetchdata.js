@@ -19,14 +19,19 @@ router.get('/under-refurbish', async (req, res) => {
 
 router.get('/instock-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":2});
-   setTimeout(()=>{
     res.send(procured);
-   })
 });
 router.get('/live-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":{ $in: [3, 4]}});
-   setTimeout(()=>{
     res.send(procured);
-   },1501)
 });
+router.get('/sold-vehicle', async (req, res) => {
+    const procured = await Procured.find({"status":5});
+    res.send(procured);
+});
+router.get('/similar-vehicle', async (req, res) => {
+    const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(5);
+    res.send(procured);
+});
+
 module.exports = router;
