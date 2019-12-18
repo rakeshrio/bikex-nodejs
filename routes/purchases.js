@@ -5,7 +5,6 @@ const {Procured} = require('../models/procurements')
 const router = express.Router();
 var multer  = require('multer')
  
-
 router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
@@ -64,7 +63,7 @@ router.post('/', async (req, res) => {
   });
   
   router.get('/customer/:id', async (req, res) => {
-    const purchase_history = await Purchase.find({"customer_id": req.params.id});
+    const purchase_history = await Purchase.find({$and:[{"customer_id": req.params.id},{"payment_status": 1}]});
     res.send(purchase_history);
   });
 
