@@ -30,7 +30,7 @@ router.get('/sold-vehicle', async (req, res) => {
     res.send(procured);
 });
 router.get('/similar-vehicle', async (req, res) => {
-    const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(100);
+    const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(50);
     res.send(procured);
 });
 
