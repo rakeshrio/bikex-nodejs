@@ -23,11 +23,11 @@ router.get('/', async (req, res) => {
   });
   router.post('/validate', async (req, res) => {
 
-    const customers = await Customer.find({"email":req.body.email});
-    if(customers){
-      for( var i in customers){
-        if(req.body.password == customers[i].password){
-          res.send({err:0,msg:'Sucessfull', data:customers});
+    const admin = await Agent.find({"email":req.body.email});
+    if(admin){
+      for( var i in admin){
+        if(req.body.password == admin[i].password){
+          res.send({err:0,msg:'Sucessfull', data:admin});
         }else{
           res.send({err:1,msg:'Invalid Password'});
         }
