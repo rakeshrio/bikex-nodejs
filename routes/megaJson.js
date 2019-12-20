@@ -9,19 +9,25 @@ var _ = require('lodash');
 
 
 router.get('/', async (req, res) => {
-  Procured.aggregate([{
-    $lookup: {
-            from: 'modals',
-            localField: "model_id",
-            foreignField: "_id",
-            as: "model"
-        }
-}])
+    let [procured, modals] = await Promise.all([Procured.find(), Modals.find()]);
+    
+    const merge = (arr1, arr2) => {
+      const temp = []
+    
+      arr1.forEach(x => {
+        arr2.forEach(y => {
+          if (x.model_id === y) {
+            temp.push({ ...x, ...y })
+          }
+        })
+      })
+    
+      return temp
+    }
 
-
- console.log(Procured)
+ console.log(merge(procured, modals))
   
-    res.send(Procured);
+    res.send(modals);
   });
 
 module.exports = router;

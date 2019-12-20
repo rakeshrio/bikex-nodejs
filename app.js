@@ -12,6 +12,7 @@ const bikedisplayuploads = require('./routes/displayuploads');
 const standard = require('./routes/standardroutes');
 const premium = require('./routes/premiumroutes');
 const faq = require('./routes/faq');
+const wishlist = require('./routes/wishlists');
 const procurestatus = require('./routes/status');
 const purchase = require('./routes/purchases')
 const centres = require('./routes/centre')
@@ -43,6 +44,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/fetch/', fetchVehicle);
   app.use('/api/premium', premium);
   app.use('/api/faq', faq);
+  app.use('/api/wishlist', wishlist);
   app.use('/api/sell', sells);
   app.use('/api/centres', centres);
   app.use('/api/purchases', purchase);
