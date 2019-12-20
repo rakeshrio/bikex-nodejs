@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     res.send(customers);
   });
 
-
+ 
   router.post('/validate', async (req, res) => {
 
     const customers = await Customer.find({"email":req.body.email});

@@ -21,4 +21,18 @@ router.get('/', async (req, res) => {
     const agents = await agent.find();
     res.send(agents);
   });
+  router.post('/validate', async (req, res) => {
+
+    const customers = await Customer.find({"email":req.body.email});
+    if(customers){
+      for( var i in customers){
+        if(req.body.password == customers[i].password){
+          res.send({err:0,msg:'Sucessfull', data:customers});
+        }else{
+          res.send({err:1,msg:'Invalid Password'});
+        }
+      }
+    }
+      res.send({err:1,msg:'Email is not registered with us..'});
+  });
 module.exports = router;

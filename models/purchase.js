@@ -47,7 +47,7 @@ function validatePurchase(purchase) {
     amount: Joi.number().min(0).required(),
     email: Joi.string().min(5).max(100).required(),
     address1: Joi.string().min(5).max(100).required(),
-    address2: Joi.string().min(5).max(100).required(),
+    address2: Joi.string(),
     town: Joi.string().min(1).max(50).required(),
     state: Joi.string().min(1).max(50).required(),
     postalcode: Joi.number().required(),
