@@ -28,8 +28,8 @@ router.post('/', async (req, res) => {
   });
 
   router.get('/notseen', async (req, res) => {
-    const finance = await Finance.find({"seen":0});
-    var length = finance.length
+    const sell = await Sell.find({"seen":0});
+    var length = sell.length
     res.send({"total":length});
   });
 
