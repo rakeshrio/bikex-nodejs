@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
   });
 
   router.get('/', async (req, res) => {
-    const sell = await Sell.find();
+    const sell = await Sell.find().sort( { date: -1 });
     res.send(sell);
   });
 

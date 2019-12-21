@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   });
 
 router.get('/', async (req, res) => {
-    const finance = await Finance.find().sort( { seen: 1 } );
+    const finance = await Finance.find().sort( { date: -1 } );
     res.send(finance);
   });
 

@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
       } 
   });
   router.get('/', async (req, res) => {
-    const purchase = await Purchase.find();
+    const purchase = await Purchase.find().sort( { date: -1 });
     res.send(purchase);
   });
 
@@ -66,5 +66,20 @@ router.post('/', async (req, res) => {
     const purchase_history = await Purchase.find({$and:[{"customer_id": req.params.id},{"payment_status": 1}]});
     res.send(purchase_history);
   });
+
+  router.get('/notseen', async (req, res) => {
+    const purchase = await Purchase.find({"seen":0});
+    var length = purchase.length
+    res.send({"total":length});
+  });
+
+  router.put('changetoseen/:id', async (req, res) => {
+    const sell = await Sell.findByIdAndUpdate(req.params.id,
+      {
+        seen:1,
+    }, { new: false });
+    if (!sell) return res.status(404).send('The sell with the given ID was not found.');
+    res.send(sell);
+  })
 
 module.exports = router;

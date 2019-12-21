@@ -21,6 +21,7 @@ const purchaseSchema = new mongoose.Schema({
     address1:String,
     address2:String,
     image:String,
+    seen:{ type:Number, default:0},
     model:String,
     mode_of_payment:String,
     state:String,
