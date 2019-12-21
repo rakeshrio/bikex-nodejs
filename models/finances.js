@@ -8,6 +8,7 @@ const financeSchema = new mongoose.Schema({
     mobile: Number,
     pincode: Number,
     dob: Date,
+    seen:{ type:Number, default:0},
     annual_income: Number,
     vehicle: String,
     date: { type:Date, default:Date.now},
