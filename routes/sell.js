@@ -22,10 +22,17 @@ router.post('/', async (req, res) => {
     res.send({"err": 0, "msg": 'We have receive your request, our team will contact you soon'});
   });
 
-router.get('/', async (req, res) => {
+  router.get('/', async (req, res) => {
     const sell = await Sell.find();
     res.send(sell);
   });
+
+  router.get('/notseen', async (req, res) => {
+    const finance = await Finance.find({"seen":0});
+    var length = finance.length
+    res.send({"total":length});
+  });
+
   router.put('/:id', async (req, res) => {
     const sell = await Sell.findByIdAndUpdate(req.params.id,
       {
