@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
       } 
   });
   router.get('/', async (req, res) => {
-    const purchase = await Purchase.find().sort( { date: 1 });
+    const purchase = await Purchase.find().sort( { date: -1 });
     res.send(purchase);
   });
 
