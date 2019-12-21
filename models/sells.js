@@ -10,6 +10,7 @@ const sellSchema = new mongoose.Schema({
     km_run: String,
     vehicle_no: String,
     name: String,
+    seen:{ type:Number, default:0},
     mobile: Number,
     city: String,
     state: String,

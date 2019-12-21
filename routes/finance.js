@@ -21,7 +21,16 @@ router.post('/', async (req, res) => {
   });
 
 router.get('/', async (req, res) => {
-    const finance = await Finance.find();
+    const finance = await Finance.find().sort( { seen: 1 } );
     res.send(finance);
   });
+
+  router.put('/:id', async (req, res) => {
+    const finance = await Finance.findByIdAndUpdate(req.params.id,
+      {
+        seen:1,
+    }, { new: false });
+    if (!finance) return res.status(404).send('The finance with the given ID was not found.');
+    res.send(finance);
+  })
 module.exports = router;

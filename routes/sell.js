@@ -26,4 +26,12 @@ router.get('/', async (req, res) => {
     const sell = await Sell.find();
     res.send(sell);
   });
+  router.put('/:id', async (req, res) => {
+    const sell = await Sell.findByIdAndUpdate(req.params.id,
+      {
+        seen:1,
+    }, { new: false });
+    if (!sell) return res.status(404).send('The sell with the given ID was not found.');
+    res.send(sell);
+  })
 module.exports = router;
