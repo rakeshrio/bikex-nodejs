@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
     res.send({"total":length});
   });
 
-  router.put('changetoseen/:id', async (req, res) => {
+  router.put('/changetoseen/:id', async (req, res) => {
     const sell = await Sell.findByIdAndUpdate(req.params.id,
       {
         seen:1,
