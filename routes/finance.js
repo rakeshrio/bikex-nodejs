@@ -25,6 +25,12 @@ router.get('/', async (req, res) => {
     res.send(finance);
   });
 
+  router.get('/notseen', async (req, res) => {
+    const finance = await Finance.find({"seen":0});
+    var length = finance.length
+    res.send({"total":length});
+  });
+
   router.put('/:id', async (req, res) => {
     const finance = await Finance.findByIdAndUpdate(req.params.id,
       {
