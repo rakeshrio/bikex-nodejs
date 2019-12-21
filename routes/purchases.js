@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
     res.send(purchase_history);
   });
 
-  router.get('/notseen', async (req, res) => {
+  router.get('/get/notseen', async (req, res) => {
     const purchase = await Purchase.find({"seen":0});
     var length = purchase.length
     console.log(length)
