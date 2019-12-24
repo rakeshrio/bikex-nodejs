@@ -25,9 +25,27 @@ router.get('/live-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":{ $in: [3, 4]}});
     res.send(procured);
 });
+router.get('/booked-vehicle', async (req, res) => {
+    const procured = await Procured.find({"status":4});
+    res.send(procured);
+});
 router.get('/sold-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":5});
     res.send(procured);
+});
+router.get('/all-purchase', async (req, res) => {
+    const procured = await Procured.find({"status":{ $in: [4, 5]}});
+    res.send(procured);
+});
+router.get('/sold-vehicle-length', async (req, res) => {
+    const procured = await Procured.find({"status":5});
+    var length = procured.length
+    res.send({"total":length});
+});
+router.get('/booked-vehicle-length', async (req, res) => {
+    const procured = await Procured.find({"status":4});
+    var length = procured.length
+    res.send({"total":length});
 });
 router.get('/similar-vehicle', async (req, res) => {
     const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(50);
