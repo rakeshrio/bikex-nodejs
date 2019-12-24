@@ -47,6 +47,13 @@ router.get('/booked-vehicle-length', async (req, res) => {
     var length = procured.length
     res.send({"total":length});
 });
+
+router.get('/total-vehicle-length', async (req, res) => {
+    const procured = await Procured.find();
+    var length = procured.length
+    res.send({"total":length});
+});
+
 router.get('/similar-vehicle', async (req, res) => {
     const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(50);
     res.send(procured);
