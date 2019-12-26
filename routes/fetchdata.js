@@ -30,6 +30,43 @@ router.get('/live-vehicle', async (req, res) => {
     .select('-status -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     res.send(procured);
 });
+router.get('/live-vehicle/scooters', async (req, res) => {
+    const procured = await Procured.find({"status":{ $in: [3, 4]}
+    }).populate({
+        path:'model_id',
+        select:'-date -updated'
+    })
+    .select('-status -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    const x = procured.filter((data)=>{
+        return data.model_id.vehicle_type === 'commuters'
+    })
+    res.send(x);
+});
+router.get('/live-vehicle/commuters', async (req, res) => {
+    const procured = await Procured.find({"status":{ $in: [3, 4]}
+    }).populate({
+        path:'model_id',
+        select:'-date -updated'
+    })
+    .select('-status -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    const x = procured.filter((data)=>{
+        return data.model_id.vehicle_type === 'bikes'
+    })
+    res.send(x);
+});
+router.get('/live-vehicle/adventurer', async (req, res) => {
+    const procured = await Procured.find({"status":{ $in: [3, 4]}
+    }).populate({
+        path:'model_id',
+        select:'-date -updated'
+    })
+    .select('-status -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    const x = procured.filter((data)=>{
+        return data.model_id.vehicle_type === 'adventurer'
+    })
+    res.send(x);
+});
+
 router.get('/booked-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":4});
     res.send(procured);
