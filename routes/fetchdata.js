@@ -22,7 +22,12 @@ router.get('/instock-vehicle', async (req, res) => {
     res.send(procured);
 });
 router.get('/live-vehicle', async (req, res) => {
-    const procured = await Procured.find({"status":{ $in: [3, 4]}});
+    const procured = await Procured.find({"status":{ $in: [3, 4]}
+    }).populate({
+        path:'model_id',
+        select:'-_id -date -updated'
+    })
+    .select('-status -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     res.send(procured);
 });
 router.get('/booked-vehicle', async (req, res) => {

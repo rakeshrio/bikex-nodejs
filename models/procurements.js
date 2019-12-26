@@ -4,7 +4,7 @@ const Joi = require('joi');
 const procurementSchema = new mongoose.Schema({
     vehicle_id:Number,
     vehicle_number:String,
-    model_id:Number,
+    model_id:{type:Number, ref: 'modals'},
     type:String,
     manufacture_year:Date,
     color:String,
