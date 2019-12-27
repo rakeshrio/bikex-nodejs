@@ -65,7 +65,7 @@ router.post('/',(req, res) => {
 
 router.get('/', async (req, res) => {
     const vehicleuploads = await VehicleUploads.find();
-    res.send({"err":0,"data":vehicleuploads});
+    res.send(vehicleuploads);
   });
 
   router.get('/:id', async (req, res) => {
