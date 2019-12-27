@@ -65,6 +65,10 @@ router.post('/',(req, res) => {
 
 router.get('/', async (req, res) => {
     const vehicleuploads = await VehicleUploads.find();
+    res.send({"err":0,"data":vehicleuploads});
+  });
+  router.get('/get/images', async (req, res) => {
+    const vehicleuploads = await VehicleUploads.find();
     res.send(vehicleuploads);
   });
 
