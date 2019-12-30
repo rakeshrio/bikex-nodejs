@@ -82,10 +82,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    const procured = await Procured.find().populate({
-      path:'model_id',
-      select:''
-  });
+    const procured = await Procured.find();
    setTimeout(()=>{
     res.send(procured);
    })
