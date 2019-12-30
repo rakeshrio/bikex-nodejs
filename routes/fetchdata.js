@@ -5,7 +5,9 @@ var multer  = require('multer')
 const app = express();
 
 router.get('/procured-vehicle', async (req, res) => {
-    const procured = await Procured.find({"status":0});
+    const procured = await Procured.find({"status":0}).populate({
+        path:'model_id',
+    });
    setTimeout(()=>{
     res.send(procured);
    })
