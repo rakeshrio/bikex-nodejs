@@ -7,6 +7,7 @@ const app = express();
 router.get('/procured-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":0}).populate({
         path:'model_id',
+        select:''
     });
    setTimeout(()=>{
     res.send(procured);
