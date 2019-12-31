@@ -4,12 +4,13 @@ const {Customer, validate} = require('../models/customers')
 const router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'attach/' })
- 
+
+var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1", "MBIKEX", "4" );
+
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
-     
     let customer = new Customer({ 
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -18,8 +19,9 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
     customer = await customer.save();
-    res.send({"err": 0, "customer": customer});
-
+    msg91.send(req.body.phone,"Hi "+req.body.firstname+", Thanks for creating an account on BikeX. Now browse from variety of two-wheeler only at bikex.in.", function(err, response){
+      res.send({"err": 0, "customer": customer, "message":response});
+    });
   });
   router.get('/', async (req, res) => {
     const customers = await Customer.find();
