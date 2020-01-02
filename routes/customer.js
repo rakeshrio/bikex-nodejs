@@ -22,7 +22,8 @@ router.post('/', async (req, res) => {
     });
     customer = await customer.save();
     // msg91.send(req.body.phone,"Hi "+req.body.firstname+", Thanks for creating an account on BikeX. Now browse from variety of two-wheeler only at bikex.in.", function(err, response){
-      res.send({"err": 0, "customer": customer, "message":response});
+      // res.send({"err": 0, "customer": customer, "message":response});
+      res.send({"cx":customer})
     // });
   });
   router.get('/', async (req, res) => {
