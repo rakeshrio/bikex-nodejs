@@ -3,12 +3,11 @@ const express = require('express');
 const {Customer, validate} = require('../models/customers')
 const router = express.Router();
 var multer  = require('multer')
-var upload = multer({ dest: 'attach/' })
 var passwordHash = require('password-hash');
 const SendOtp = require('sendotp');
 const sendOtp = new SendOtp('310801AwwK4rO25e0af36eP1');
 
-// var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1", "MBIKEX", "4" );
+var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1", "MBIKEX", "4" );
 
 
 router.post('/', async (req, res) => {
@@ -22,10 +21,9 @@ router.post('/', async (req, res) => {
       password: passwordHash.generate(req.body.password),
     });
     customer = await customer.save();
-    // msg91.send(req.body.phone,"Hi "+req.body.firstname+", Thanks for creating an account on BikeX. Now browse from variety of two-wheeler only at bikex.in.", function(err, response){
-      // res.send({"err": 0, "customer": customer, "message":response});
-      res.send({"cx":customer})
-    // });
+    msg91.send(req.body.phone,"Hi "+req.body.firstname+", Thanks for creating an account on BikeX. Now browse from variety of two-wheeler only at bikex.in.", function(err, response){
+      res.send({"err": 0, "customer": customer, "message":response});
+    });
   });
   router.get('/', async (req, res) => {
     const customers = await Customer.find()
