@@ -27,15 +27,17 @@ router.post('/', async (req, res) => {
     // });
   });
   router.get('/', async (req, res) => {
-    const customers = await Customer.find();
+    const customers = await Customer.find()
+    .select("-password");
     res.send(customers);
   });
 
   router.get('/:id', async (req, res) => {
-    const customers = await Customer.findById(req.params.id);
+    const customers = await Customer.findById(req.params.id)
+    .select("-password");
     res.send(customers);
   });
-
+ 
  
   router.post('/validate', async (req, res) => {
 
@@ -60,5 +62,26 @@ router.post('/emailverify', async (req, res) => {
   }
     res.send({err:0,msg:'Available'});
 });
+
+router.post('/sendotp', async (req, res) => {
+  sendOtp.send(req.body.phone, "PRIIND", function (error, data) {
+    res.send(data);
+  });
+});
+
+router.post('/otp-retry', async (req, res) => {
+  sendOtp.send(req.body.phone, "PRIIND", function (error, data) {
+    res.send(data);
+  });
+});
+
+router.post('/verifyotp', async (req, res) => {
+  sendOtp.verify(req.body.phone, req.body.otp, function (error, data) {
+    console.log(data); // data object with keys 'message' and 'type'
+    if(data.type == 'success') res.send('OTP verified successfully')
+    if(data.type == 'error') res.send('OTP verification failed')
+  });
+});
+
   
 module.exports = router;
