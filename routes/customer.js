@@ -5,7 +5,8 @@ const router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'attach/' })
 var passwordHash = require('password-hash');
-
+const SendOtp = require('sendotp');
+const sendOtp = new SendOtp('310801AwwK4rO25e0af36eP1');
 
 // var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1", "MBIKEX", "4" );
 
