@@ -37,6 +37,11 @@ router.post('/', async (req, res) => {
     res.send(customers);
   });
  
+  router.get('/fetch/total-customer-length', async (req, res) => {
+    const customer = await Customer.find();
+    var length = customer.length
+    res.send({"total":length});
+});
  
   router.post('/validate', async (req, res) => {
 
