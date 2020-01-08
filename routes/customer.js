@@ -1,4 +1,3 @@
-
 const express = require('express');
 const {Customer, validate} = require('../models/customers')
 const router = express.Router();
@@ -21,7 +20,7 @@ router.post('/', async (req, res) => {
       password: passwordHash.generate(req.body.password),
     });
     customer = await customer.save();
-    msg91.send(req.body.phone,"Hi "+req.body.firstname+", Thanks for creating an account on BikeX. Now browse from variety of two-wheeler only at bikex.in.", function(err, response){
+    msg91.send(req.body.phone,"Hi "+req.body.firstname+", Your BikeX account has been created successfully. You’re all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!", function(err, response){
       res.send({"err": 0, "customer": customer, "message":response});
     });
   });
