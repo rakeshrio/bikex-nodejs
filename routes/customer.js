@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     });
   });
   router.get('/', async (req, res) => {
-    const customers = await Customer.find()
+    const customers = await Customer.find().sort( { date: -1 })
     .select("-password");
     res.send(customers);
   });
