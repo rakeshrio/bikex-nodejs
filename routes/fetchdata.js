@@ -9,15 +9,11 @@ router.get('/procured-vehicle', async (req, res) => {
         path:'model_id',
         select:''
     });
-   setTimeout(()=>{
     res.send(procured);
-   })
 });
 router.get('/under-refurbish', async (req, res) => {
     const procured = await Procured.find({"status":1});
-   setTimeout(()=>{
     res.send(procured);
-   })
 });
 
 router.get('/instock-vehicle', async (req, res) => {

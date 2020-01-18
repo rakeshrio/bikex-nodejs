@@ -31,7 +31,7 @@ const purchaseSchema = new mongoose.Schema({
     razorpay_signature:String,
     payment_status:Number,
     date: { type:Date, default:Date.now},
-});
+}); 
 const Purchase = mongoose.model('purchase', purchaseSchema)
 
 function validatePurchase(purchase) {

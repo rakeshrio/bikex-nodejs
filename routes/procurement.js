@@ -83,17 +83,13 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    const procured = await Procured.find();
-   setTimeout(()=>{
+    const procured = await Procured.find().sort( { date: -1 });
     res.send(procured);
-   })
 });
 
 router.get('/:id', async (req, res) => {
   const procured = await Procured.find({'vehicle_id': req.params.id});
- setTimeout(()=>{
   res.send(procured);
- })
 });
 
 router.put('/:id', async (req, res) => {
