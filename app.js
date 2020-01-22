@@ -21,6 +21,8 @@ const finance = require('./routes/finance')
 const uploadStatus = require('./routes/uploadstatus')
 const fetchVehicle = require('./routes/fetchdata')
 const megaFile = require('./routes/megaJson')
+const agentActivity = require('./routes/agentActivities')
+const loggedIn = require('./routes/loggedin')
 
 const app = express();
 app.use(express.json());
@@ -52,6 +54,8 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/purchases', purchase);
   app.use('/api/procurestatus', procurestatus);
   app.use('/api/vehicle', megaFile);
+  app.use('/api/agent-activity',agentActivity);
+  app.use('/api/logged-in', loggedIn);
 
   app.get('/', (req, res)=>{
     res.send('you are not authorized to view this page')
