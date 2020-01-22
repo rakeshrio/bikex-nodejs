@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
   });
 
 router.get('/', async (req, res) => {
-    const agentActivity = await AgentActivity.find();
+    const agentActivity = await AgentActivity.find().sort( { date: -1 });
     res.send(agentActivity);
   });
 

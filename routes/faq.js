@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
       res.send({"err": 0, "faq": faq});
   });
   router.get('/', async (req, res) => {
-    const faq = await Faq.find();
+    const faq = await Faq.find().sort( { date: -1 });
     res.send(faq);
   });
   
