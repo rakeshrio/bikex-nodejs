@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
     let agentActivity = new AgentActivity({ 
     agent_username: req.body.agent_username,
     activity: req.body.activity,
+    details: req.body.details
     });
     agentActivity = await agentActivity.save();
     res.send({"err": 0, "agentActivity": agentActivity});
