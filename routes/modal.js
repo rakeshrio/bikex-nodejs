@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
             kerb_weight: req.body.kerb_weight,  
             comments:req.body.comments,
             });           
-        modal =  modal.save();
+        modal =  await modal.save();
         if(err){
           res.json({'err':1,'msg':'Modal_error'})
         }
