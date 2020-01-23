@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    const modal = await Modals.find();
+    const modal = await Modals.find().sort( { date: -1 });
     res.send(modal);
 });
 
