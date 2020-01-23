@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
         }
           else
           {
-          res.json({'err':0,'msg':'Procured', 'procured_list':modal})
+          res.json(modal)
           } 
       }
     });
