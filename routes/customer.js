@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     msg91.send(req.body.phone,"Hi "+req.body.firstname+", Your BikeX account has been created successfully. You’re all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!", function(err, response){
       res.send({"err": 0, "customer": customer, "message":response});
     });
-  });
+  }); 
   router.get('/', async (req, res) => {
     const customers = await Customer.find().sort( { date: -1 })
     .select("-password");

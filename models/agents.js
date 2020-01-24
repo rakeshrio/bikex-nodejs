@@ -8,7 +8,7 @@ const agentSchema = new mongoose.Schema({
     phone: Number,
     designation: String,
     date: { type:Date, default:Date.now},
-});
+}); 
 const Agent = mongoose.model('agents', agentSchema)
 
 function validateAgent(agent) {

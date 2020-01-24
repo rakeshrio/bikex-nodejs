@@ -1,6 +1,7 @@
 const {Agent, validate} = require('../models/agents')
 const express = require('express');
 const router = express.Router();
+var passwordHash = require('password-hash');
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
@@ -8,17 +9,17 @@ router.post('/', async (req, res) => {
   
     let agent = new Agent({ 
     agent_username: req.body.agent_username,
-    password: req.body.password,
+    password: passwordHash.generate(req.body.password),
     email: req.body.email,
     phone: req.body.phone,
     designation: req.body.designation,
     });
     agent = await agent.save();
     res.send({"err": 0, "agent": agent});
-  });
+  }); 
 
 router.get('/', async (req, res) => {
-    const agents = await agent.find();
+    const agents = await Agent.find();
     res.send(agents);
   });
   router.post('/validate', async (req, res) => {
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
     const admin = await Agent.find({"email":req.body.email});
     if(admin){
       for( var i in admin){
-        if(req.body.password == admin[i].password){
+        if(passwordHash.verify(req.body.password,admin[i].password)){
           res.send({err:0,msg:'Sucessfull', data:admin});
         }else{
           res.send({err:1,msg:'Invalid Password'});
