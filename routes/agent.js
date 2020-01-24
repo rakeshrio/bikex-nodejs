@@ -22,6 +22,26 @@ router.get('/', async (req, res) => {
     const agents = await Agent.find();
     res.send(agents);
   });
+
+  router.post('/changepassword', async (req, res) => {
+     const agent = await Agent.find({"_id": req.body.id});
+     if(agent){
+       for( var i in agent){
+         if(passwordHash.verify(req.body.currentpassword,agent[i].password)){
+           const agentupdated = await Agent.findByIdAndUpdate(req.body.id,
+             {
+               password: passwordHash.generate(req.body.newpassword)
+           },{new: false})
+           if(!agentupdated) return res.status(404).send('Some error occured.');
+           res.send({err:1,msg:'Password Changed',agentupdated});
+          
+         }else{
+           res.send({err:1,msg:'Invalid Password'});
+         }
+       }
+     }
+   })
+
   router.post('/validate', async (req, res) => {
 
     const admin = await Agent.find({"email":req.body.email});
@@ -36,4 +56,8 @@ router.get('/', async (req, res) => {
     }
       res.send({err:1,msg:'Email is not registered with us..'});
   });
+
+  
+
+
 module.exports = router;
