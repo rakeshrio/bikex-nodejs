@@ -1,4 +1,4 @@
-const {Agent, validate} = require('../models/agents')
+const {Agent, validate, validateAgentedit} = require('../models/agents')
 const express = require('express');
 const router = express.Router();
 var passwordHash = require('password-hash');
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   }); 
 
 router.get('/', async (req, res) => {
-    const agents = await Agent.find().sort( { date: -1 });
+    const agents = await Agent.find().sort( { date: -1 }).select("-password");
     res.send(agents);
   });
 
@@ -58,6 +58,25 @@ router.get('/', async (req, res) => {
     }
       res.send({err:1,msg:'Email is not registered with us..'});
   });
+
+  router.put('/:id', async (req, res) => {
+
+    const { error } = validateAgentedit(req.body); 
+    if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+    const agent = await Agent.findByIdAndUpdate(req.params.id,
+      { 
+        agent_username: req.body.agent_username,
+        email: req.body.email,
+        phone: req.body.phone,
+        designation: req.body.designation,
+        updated: Date.now()
+      }, { new: true });
+  
+    if (!agent) return res.status(404).send('The agent with the given ID was not found.');
+    
+    res.send(agent);
+  });
+
 
   router.delete('/:id', async (req, res) => {
     const agent = await Agent.findByIdAndRemove(req.params.id);
