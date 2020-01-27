@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   }); 
 
 router.get('/', async (req, res) => {
-    const agents = await Agent.find();
+    const agents = await Agent.find().sort( { date: -1 });
     res.send(agents);
   });
 
