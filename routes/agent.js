@@ -32,8 +32,10 @@ router.get('/', async (req, res) => {
              {
                password: passwordHash.generate(req.body.newpassword)
            },{new: false})
+
            if(!agentupdated) return res.status(404).send('Some error occured.');
-           res.send({err:1,msg:'Password Changed',agentupdated});
+           
+           res.send({err:0,msg:'Password Changed',agentupdated});
           
          }else{
            res.send({err:1,msg:'Invalid Password'});
