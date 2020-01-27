@@ -34,11 +34,11 @@ router.get('/', async (req, res) => {
            },{new: false})
 
            if(!agentupdated) return res.status(404).send('Some error occured.');
-           
-           res.send({err:0,msg:'Password Changed',agentupdated});
+
+           res.send({err:0,msg:'Password Changed Sucessfull.',agentupdated});
           
          }else{
-           res.send({err:1,msg:'Invalid Password'});
+           res.send({err:1,msg:'Invalid Old Password.'});
          }
        }
      }
@@ -59,7 +59,13 @@ router.get('/', async (req, res) => {
       res.send({err:1,msg:'Email is not registered with us..'});
   });
 
+  router.delete('/:id', async (req, res) => {
+    const agent = await Agent.findByIdAndRemove(req.params.id);
   
+    if (!agent) return res.status(404).send('The agent with the given ID was not found.');
+  
+    res.send(agent);
+  });
 
 
 module.exports = router;
