@@ -8,7 +8,7 @@ const agentSchema = new mongoose.Schema({
     phone: Number,
     designation: String,
     date: { type:Date, default:Date.now},
-    updated: { type:Date, default:Date.now},
+    updated: {type:Date},
 }); 
 const Agent = mongoose.model('agents', agentSchema)
 

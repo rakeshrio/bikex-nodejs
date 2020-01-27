@@ -77,6 +77,37 @@ router.get('/', async (req, res) => {
     res.send(agent);
   });
 
+  router.put('/update/:id', async (req, res) => {
+
+    const admin = await Agent.findById(req.params.id);
+    if(admin){
+     
+        if(passwordHash.verify(req.body.password,admin.password)){
+
+          const { error } = validate(req.body); 
+          if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+          
+          const agent = await Agent.findByIdAndUpdate(req.params.id,
+            { 
+              agent_username: req.body.agent_username,
+              email: req.body.email,
+              phone: req.body.phone,
+              designation: req.body.designation,
+              updated: Date.now()
+            }, { new: true });
+        
+          if (!agent) return res.status(404).send('The agent with the given ID was not found.');
+          
+          res.send(agent);
+
+        }else{
+          return  res.status(404).send({err:1,msg:'Incorrect Password.'})
+        }
+    }else{
+      res.send('Agent not Found')
+    }
+  });
+
 
   router.delete('/:id', async (req, res) => {
     const agent = await Agent.findByIdAndRemove(req.params.id);
