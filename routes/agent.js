@@ -43,7 +43,6 @@ router.get('/', async (req, res) => {
        }
      }
    })
-
   router.post('/validate', async (req, res) => {
 
     const admin = await Agent.find({"email":req.body.email});
@@ -98,16 +97,15 @@ router.get('/', async (req, res) => {
         
           if (!agent) return res.status(404).send('The agent with the given ID was not found.');
           
-          res.send(agent);
+          res.send({err:1,msg:'Profile has been updated.',agent});
 
         }else{
-          return  res.status(404).send({err:1,msg:'Incorrect Password.'})
+          return  res.status(404).send({err:1,msg:'Incorrect Password. Password is case-sensitive.'})
         }
     }else{
       res.send('Agent not Found')
     }
   });
-
 
   router.delete('/:id', async (req, res) => {
     const agent = await Agent.findByIdAndRemove(req.params.id);

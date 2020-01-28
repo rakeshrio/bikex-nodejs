@@ -92,6 +92,15 @@ router.get('/:id', async (req, res) => {
   res.send(procured);
 });
 
+router.post('/checkregistration', async (req, res) => {
+  const procured = await Procured.findOne({'regn_no': req.body.registration});
+  if(!procured){
+    res.send('Safe')
+  }else{
+    res.send(`vehicle ${procured.vehicle_id} already has this regn no.`)
+  }
+}); 
+
 router.put('/:id', async (req, res) => {
   var documents = []
       for (var i in req.files){
