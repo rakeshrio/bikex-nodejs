@@ -95,9 +95,9 @@ router.get('/:id', async (req, res) => {
 router.post('/checkregistration', async (req, res) => {
   const procured = await Procured.findOne({'regn_no': req.body.registration});
   if(!procured){
-    res.send('Safe')
+    res.send({err: 0,msg:'Verified'})
   }else{
-    res.send(`vehicle ${procured.vehicle_id} already has this regn no.`)
+    res.send({err:1,msg:`vehicle ${procured.vehicle_id} already has this regn no.`})
   }
 }); 
 
