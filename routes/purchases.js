@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
         msg91.send(phone,`Hi ${username}, we have received your order. Your order ID is ${orderid} and payment ID is ${razor_id}. Our team will contact you shortly.`, function(err, response){
         }); 
 
-        msg91.send(supportphone,`New order received from ${username}, with order ID is ${orderid} and payment ID is ${razor_id}. Please reach customer at ${phone}`, function(err, response){
+        msg91.send(supportphone,`New order received from ${username}, with order ID ${orderid} and payment ID ${razor_id}. Please reach customer at ${phone}`, function(err, response){
           res.send({response, err, supportphone, phone});
         });
 })
