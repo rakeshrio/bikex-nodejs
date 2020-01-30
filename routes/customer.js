@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     customer = await customer.save();
     var phone = req.body.phone
     var username = req.body.firstname
-    var supportphone  = ["7602743422","6363623189"]
+    var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
 
     msg91.send(supportphone,`${username} have just registered with us. You can reach customer at ${phone}. Team BikeX.`, function(err, response){
     });
