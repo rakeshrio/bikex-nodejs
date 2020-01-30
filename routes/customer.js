@@ -3,12 +3,13 @@ const {Customer, validate} = require('../models/customers')
 const router = express.Router();
 var multer  = require('multer')
 var passwordHash = require('password-hash');
+
 const SendOtp = require('sendotp');
-const sendOtp = new SendOtp('310801AwwK4rO25e0af36eP1');
+const sendOtp = new SendOtp('310801AwwK4rO25e0af36eP1', 'OTP for your order is {{otp}}, please do not share it with anybody.');
 
-var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1", "MBIKEX", "4" );
+var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1","MBIKEX","4");
 
-
+ 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
@@ -20,14 +21,31 @@ router.post('/', async (req, res) => {
       password: passwordHash.generate(req.body.password),
     });
     customer = await customer.save();
-    msg91.send(req.body.phone,"Hi "+req.body.firstname+", Your BikeX account has been created successfully. You’re all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!", function(err, response){
-      res.send({"err": 0, "customer": customer, "message":response});
-    });
+    var phone = req.body.phone
+    var username = req.body.firstname
+      msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
+        res.send({response, err, phone});
+      });
   }); 
   router.get('/', async (req, res) => {
     const customers = await Customer.find().sort( { date: -1 })
     .select("-password");
     res.send(customers);
+  }); 
+
+
+  router.post('/test/message', async (req, res) => {
+  var phone = req.body.phone
+  var username = req.body.firstname
+    msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
+      res.send({response, err, phone});
+    });
+
+//   msg91.getBalance("4", function(err, msgCount){
+//     console.log(err);
+//     console.log(msgCount);
+// });
+
   });
 
   router.get('/:id', async (req, res) => {
@@ -67,13 +85,13 @@ router.post('/emailverify', async (req, res) => {
 });
 
 router.post('/sendotp', async (req, res) => {
-  sendOtp.send(req.body.phone, "PRIIND", function (error, data) {
+  sendOtp.send(req.body.phone, "MBIKEX", function (error, data) {
     res.send(data);
   });
 });
 
 router.post('/otp-retry', async (req, res) => {
-  sendOtp.send(req.body.phone, "PRIIND", function (error, data) {
+  sendOtp.send(req.body.phone, "MBIKEX", function (error, data) {
     res.send(data);
   });
 });
