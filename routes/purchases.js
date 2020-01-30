@@ -3,7 +3,10 @@ const express = require('express');
 const {Purchase, validate} = require('../models/purchase')
 const {Procured} = require('../models/procurements')
 const router = express.Router();
-var multer  = require('multer')
+var multer  = require('multer');
+
+var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1","MBIKEX","4");
+
  
 router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
@@ -55,7 +58,20 @@ router.post('/', async (req, res) => {
             payment_status:req.body.payment_status
         }, { new: false });
       if (!purchase) return res.status(404).send('The purchase with the given ID was not found.');
-      res.send(purchase);
+      var phone = req.body.phone
+      var username = req.body.firstname
+      var orderid = req.body.order_id
+      var razor_id = req.body.razorpay_order_id
+
+      if(!razor_id){
+        msg91.send(phone,`Hi ${username}, we are glad you are interested in buying our vehicle. We noticed that you were unable to initiate online payment. Please let us know the issue at info@bikex.in or call us at 9742744444.`, function(err, response){
+          res.send({response, err, phone});
+        }); 
+      }else{
+        msg91.send(phone,`Hi ${username}, we have received your order. Your order ID is ${orderid} and payment ID is ${razor_id}. Our team will contact you shortly.`, function(err, response){
+          res.send({response, err, phone});
+        }); 
+      }
 })
   router.get('/:id', async (req, res) => {
     const purchase = await Purchase.findById(req.params.id);

@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     var username = req.body.firstname
       msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
         res.send({response, err, phone});
-      });
+      }); 
   }); 
   router.get('/', async (req, res) => {
     const customers = await Customer.find().sort( { date: -1 })
