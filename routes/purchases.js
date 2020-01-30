@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
         }, { new: false });
       if (!purchase) return res.status(404).send('The purchase with the given ID was not found.');
       var phone = req.body.phone
-      supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
+      var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
       var username = req.body.firstname
       var orderid = req.body.order_id
       var razor_id = req.body.razorpay_payment_id

@@ -23,6 +23,11 @@ router.post('/', async (req, res) => {
     customer = await customer.save();
     var phone = req.body.phone
     var username = req.body.firstname
+    var supportphone  = ["7602743422","6363623189"]
+
+    msg91.send(supportphone,`${username} have just registered with us. You can reach customer at ${phone}. Team BikeX.`, function(err, response){
+    });
+
       msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
         res.send({response, err, phone});
       }); 
