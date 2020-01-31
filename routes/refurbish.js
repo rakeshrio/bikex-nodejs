@@ -29,11 +29,7 @@ router.post('/', async (req, res) => {
 
           let refurbished = new Refurbished({
            vehicle_number:req.body.vehicle_number,
-           center_code: req.body.center_code,
-           make: req.body.make,
-           type_of_vehicle: req.body.type_of_vehicle,
-           model_name:req.body.model_name,
-           check_for:req.body.check_for,
+           total_cost: req.body.total_cost,
            parts_changed:req.body.parts_changed,
            comments:req.body.comments,
             });           
@@ -41,7 +37,7 @@ router.post('/', async (req, res) => {
         if(err){}
           else
           {
-          res.json({'err':0,'msg':'Procured', 'procured_list':refurbished})
+          res.json({'err':0,'msg':'Procured', 'refurbished_list':refurbished})
           } 
       }
     });
