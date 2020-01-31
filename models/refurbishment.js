@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const refurbishSchema = new mongoose.Schema({
-    vehicle_number:String,
+    vehicle_number:Number,
     total_cost:Number,
     parts_changed:Array,
     comments:String,
@@ -13,7 +13,7 @@ const Refurbished = mongoose.model('refurbished_list', refurbishSchema)
 
 function validateRefurbishment(refurbish) {
     const schema = {
-    vehicle_number: Joi.string().min(1).max(50).required(),
+    vehicle_number: Joi.number().min(1).max(50).required(),
     total_cost: Joi.required(),
     parts_changed: Joi.required(),
     comments: Joi.string().min(1).max(100),
