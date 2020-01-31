@@ -11,6 +11,16 @@ router.get('/procured-vehicle', async (req, res) => {
     });
     res.send(procured);
 });
+
+router.get('/all-vehicles', async (req, res) => {
+    const procured = await Procured.find().populate({
+        path:'model_id',
+        select:''
+    });
+    res.send(procured);
+});
+
+
 router.get('/under-refurbish', async (req, res) => {
     const procured = await Procured.find({"status":1});
     res.send(procured);
