@@ -29,7 +29,7 @@ const purchaseSchema = new mongoose.Schema({
     razorpay_order_id:String,
     razorpay_payment_id:String,
     razorpay_signature:String,
-    payment_status:Number,
+    payment_status:{ type:Number, default:0},
     date: { type:Date, default:Date.now},
 }); 
 const Purchase = mongoose.model('purchase', purchaseSchema)
