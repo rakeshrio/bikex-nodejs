@@ -45,9 +45,12 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     const refurbished = await Refurbished.find();
-   setTimeout(()=>{
     res.send(refurbished);
-   },2000)
+});
+
+router.get('/:id', async (req, res) => {
+  const refurbish = await Refurbished.find({"vehicle_number": req.params.id});
+  res.send(refurbish);
 });
 
 router.put('/:id', async (req, res) => {
