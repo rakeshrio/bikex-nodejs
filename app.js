@@ -23,6 +23,7 @@ const fetchVehicle = require('./routes/fetchdata')
 const megaFile = require('./routes/megaJson')
 const agentActivity = require('./routes/agentActivities')
 const loggedIn = require('./routes/loggedin')
+const banneruploads= require('./routes/banners')
 
 const app = express();
 app.use(express.json());
@@ -41,6 +42,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/refurbished', refurbishment);
   app.use('/api/agents', agents);
   app.use('/api/uploads', bikeuploads);
+  app.use('/api/banners', banneruploads);
   app.use('/api/upload-display', bikedisplayuploads);
   app.use('/api/uploadstatus', uploadStatus);
   app.use('/api/standard', standard);
