@@ -59,13 +59,10 @@ router.put('/:id', async (req, res) => {
   if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
   const refurbished = await Refurbished.findByIdAndUpdate(req.params.id,
     { 
-           vehicle_number:req.body.vehicle_number,
-           center_code: Number,
-           make: String,
-           type_of_vehicle: String,
-           model_name:String,
-           parts_changed:Array,
-           comments:String,
+      vehicle_number:req.body.vehicle_number,
+      total_cost: req.body.total_cost,
+      parts_changed:req.body.parts_changed,
+      comments:req.body.comments,
     }, { new: false });
 
   if (!refurbished) return res.status(404).send('The refurbished with the given ID was not found.');
