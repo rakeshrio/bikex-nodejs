@@ -63,6 +63,11 @@ router.get('/', async (req, res) => {
     res.send({"err":0,banners});
   });
 
+  router.get('/visible', async (req, res) => {
+    const banners = await Bikexbanners.find({"visibility": 1});
+    res.send({"err":0,banners});
+  });
+
   router.get('/:id', async (req, res) => {
     const Bikexbanners = await Bikexbanners.find({'vehicle_id': req.params.id});
     res.send({"err":0,"data":Bikexbanners});
