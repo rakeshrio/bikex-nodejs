@@ -5,7 +5,7 @@ const bannersSchema = new mongoose.Schema({
     images:String,
     path: String,
     Date: { type:Date, default:Date.now},
-    visibility: {type: Boolean, default: false}
+    visibility: {type: Number, default: 0}
 });
 const bikexbanners = mongoose.model('bikex_banners', bannersSchema)
 
@@ -13,7 +13,7 @@ function validatebanners(uploadcheck) {
     const schema = {
       images:Joi.string(),
       path:Joi.string(),
-      visibility: Joi.boolean()
+      visibility: Joi.number()
     };
   
     return Joi.validate(uploadcheck, schema);

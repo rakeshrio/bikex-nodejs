@@ -91,26 +91,15 @@ router.get('/', async (req, res) => {
   });
 
   router.put('/visiblity/:id', async (req, res) => {
-    upload(req,res,async function(err)
-    {
-      if(err)
-      {res.json({'err':1,'msg':'Unexpected error!', err})}
-      else
-        {
 
         const bikexbanners = await Bikexbanners.findByIdAndUpdate(req.params.id,
           { 
-            images:req.file.key,
-            path:req.file.location,
             visibility:req.body.visibility
           }, { new: false });
       
         if (!bikexbanners) return res.status(404).send('The vehicle with the given ID was not found.');
         
-        res.send(bikexbanners);
-
-        }
-        })
+        res.send(bikexbanners);  
   });
 
   router.delete('/:id', async (req, res) => {
