@@ -1,6 +1,8 @@
 
 const express = require('express');
 const {Message, validate} = require('../models/sendmessage')
+const {Customer} = require('../models/customers')
+
 const router = express.Router();
 var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1","MBIKEX","4");
 
@@ -23,10 +25,37 @@ router.post('/', async (req, res) => {
         }else if(err){
             res.send({"err": 1, "message": err});
         }
-    });
-
-       
+    });    
   }); 
+
+  router.post('/array', async (req, res) => {
+    var x = req.body.ids
+    var phone = []
+    for (var i in x){
+      const customer = await Customer.find({"_id": x[i]});
+      if(customer){
+        phone.push((customer[0].phone).toString())
+      }else{
+        phone.push("")
+      }
+    }
+    for (var i in x){
+      message = req.body.message
+      msg91.send(phone,`${message}`, async function(err, response){
+              let message = new Message({ 
+                  message:req.body.message,
+                  customer_id: x[i],
+                  agent_id: req.body.agent_id,
+                  phone: phone[i],
+                  agent_username: req.body.agent_username,
+            });
+            message = await message.save();
+      });    
+    }
+    res.send('sucess')
+  });
+
+
   router.get('/', async (req, res) => {
     const message = await Message.find().sort( { date: -1 });
     res.send(message);
