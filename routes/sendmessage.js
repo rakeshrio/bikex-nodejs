@@ -39,19 +39,21 @@ router.post('/', async (req, res) => {
         phone.push("")
       }
     }
-    for (var i in x){
+    
       message = req.body.message
       msg91.send(phone,`${message}`, async function(err, response){
+             for (var i in x){
               let message = new Message({ 
-                  message:req.body.message,
-                  customer_id: x[i],
-                  agent_id: req.body.agent_id,
-                  phone: phone[i],
-                  agent_username: req.body.agent_username,
-            });
-            message = await message.save();
+                message:req.body.message,
+                customer_id: x[i],
+                agent_id: req.body.agent_id,
+                phone: phone[i],
+                agent_username: req.body.agent_username,
+              });
+              message = await message.save()
+             }
       });    
-    }
+    
     res.send('sucess')
   });
 
