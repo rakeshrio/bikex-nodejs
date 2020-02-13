@@ -25,6 +25,7 @@ const agentActivity = require('./routes/agentActivities')
 const loggedIn = require('./routes/loggedin')
 const banneruploads= require('./routes/banners')
 const sendmessage= require('./routes/sendmessage')
+const featuredbike= require('./routes/featuredbike')
 
 
 const app = express();
@@ -53,6 +54,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/faq', faq);
   app.use('/api/wishlist', wishlist);
   app.use('/api/sell', sells);
+  app.use('/api/featured', featuredbike);
   app.use('/api/sendmessage', sendmessage);
   app.use('/api/finance', finance);
   app.use('/api/centres', centres);
