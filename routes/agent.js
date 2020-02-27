@@ -23,6 +23,11 @@ router.get('/', async (req, res) => {
     res.send(agents);
   });
 
+  router.get('/:id', async (req, res) => {
+    const agents = await Agent.findById(req.params.id).select("-password");
+    res.send(agents);
+  });
+
   router.post('/changepassword', async (req, res) => {
      const agent = await Agent.find({"_id": req.body.id});
      if(agent){
