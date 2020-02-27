@@ -75,7 +75,6 @@ router.get('/', async (req, res) => {
     
     res.send(agent);
   });
-
   router.put('/update/:id', async (req, res) => {
 
     const admin = await Agent.findById(req.params.id);
@@ -115,5 +114,100 @@ router.get('/', async (req, res) => {
     res.send(agent);
   });
 
+  router.put('/permission/view_vehicle/:id', async (req, res) => {
+    if(req.body.permissionfor == 'view_vehicle'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          view_vehicle: req.body.view_vehicle,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'edit_vehicle'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          edit_vehicle: req.body.edit_vehicle,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'view_customer'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          view_customer: req.body.view_customer,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'add_customer'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          add_customer: req.body.add_customer,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'view_refurbish'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          view_refurbish: req.body.view_refurbish,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'view_procured_price'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          view_procured_price: req.body.view_procured_price,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'perform_offine_sell'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          perform_offine_sell: req.body.perform_offine_sell,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'change_banner'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          change_banner: req.body.change_banner,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'view_agent_activity'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          view_agent_activity: req.body.view_agent_activity,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'manage_faq'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          manage_faq: req.body.manage_faq,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else if(req.body.permissionfor == 'manage_models'){
+      const agent = await Agent.findByIdAndUpdate(req.params.id,
+        { 
+          manage_models: req.body.manage_models,
+          updated: Date.now()
+        }, { new: true });
+      if (!agent) return res.status(404).send('The agent with the given ID was not found.'); 
+      return res.send(agent);
+    }else{
+      return res.status(404).send('Not Authorized to perform this Action.'); 
+    }
+  });
+
+  
 
 module.exports = router;

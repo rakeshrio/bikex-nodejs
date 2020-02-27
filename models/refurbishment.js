@@ -8,7 +8,7 @@ const refurbishSchema = new mongoose.Schema({
     comments:String,
     date: { type:Date, default:Date.now},
     updated: { type:Date, default:Date.now}
-});
+}); 
 const Refurbished = mongoose.model('refurbished_list', refurbishSchema)
 
 function validateRefurbishment(refurbish) {

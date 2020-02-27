@@ -48,6 +48,11 @@ router.get('/', async (req, res) => {
     res.send(refurbished);
 });
 
+router.get('/latest', async (req, res) => {
+  const refurbished = await Refurbished.find().sort( { date: -1 }).limit(20);
+  res.send(refurbished);
+});
+
 router.get('/:id', async (req, res) => {
   const refurbish = await Refurbished.find({"vehicle_number": req.params.id});
   res.send(refurbish);
