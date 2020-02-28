@@ -80,6 +80,21 @@ router.post('/', async (req, res) => {
       res.send({err:1,msg:'Email is not registered with us..'});
   });
 
+  router.post('/validateUser', async (req, res) => {
+
+    const customers = await Customer.find({"email":req.body.email});
+    if(customers){
+      for( var i in customers){
+        if(passwordHash.verify(req.body.password,customers[i].password)){
+          res.send(customers);
+        }else{
+          res.send({err:1,msg:'Invalid Password'});
+        }
+      }
+    }
+      res.send({err:1,msg:'Email is not registered with us..'});
+  });
+
 router.post('/emailverify', async (req, res) => {
 
   const customers = await Customer.find({"email":req.body.email});

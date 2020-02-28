@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
           } 
       }
     });
-});
+}); 
 
 router.get('/', async (req, res) => {
     const refurbished = await Refurbished.find();
