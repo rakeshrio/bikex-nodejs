@@ -74,9 +74,8 @@ router.get('/', async (req, res) => {
           res.send({err:1,msg:'Invalid Password'});
         }
       }
-    }else{
-      res.send({err:1,msg:'Email is not registered with us..'});
     }
+      res.send({err:1,msg:'Email is not registered with us..'});
   });
 
   router.put('/:id', async (req, res) => {
