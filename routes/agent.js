@@ -69,9 +69,9 @@ router.get('/', async (req, res) => {
     if(admin){
       for( var i in admin){
         if(passwordHash.verify(req.body.password,admin[i].password)){
-          res.send(admin);
+          res.status(200).send(admin);
         }else{
-          res.send({err:1,msg:'Invalid Password'});
+          res.status(400).send({err:1,msg:'Invalid Password'});
         }
       }
     }
