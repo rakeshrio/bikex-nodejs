@@ -69,6 +69,14 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.get('/', (req, res)=>{
     res.send('you are not authorized to view this page')
   })
+
+  app.get('/abhishek', (req, res)=>{
+    res.status(400).send({
+      "err":'Something went wrong'
+    })
+  })
+
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
