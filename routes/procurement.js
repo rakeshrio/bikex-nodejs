@@ -71,6 +71,7 @@ router.post('/', async (req, res) => {
             procured_date: req.body.procured_date,
             procured_price: req.body.procured_price,
             registration_cost: req.body.registration_cost,
+            km_reading: req.body.km_reading,
             selling_price: req.body.selling_price,
             });           
         procured =  procured.save();
@@ -141,6 +142,8 @@ router.put('/:id', async (req, res) => {
             procured_price: req.body.procured_price,
             selling_price: req.body.selling_price,
             registration_cost: req.body.registration_cost,
+            km_reading: req.body.km_reading,
+
       updated: req.body.updated
     }, { new: false });
 

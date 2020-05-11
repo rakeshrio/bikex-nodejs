@@ -63,21 +63,6 @@ router.get('/', async (req, res) => {
       res.send({err:1,msg:'Email is not registered with us..'});
   });
 
-  router.post('/validateAgent', async (req, res) => {
-
-    const admin = await Agent.find({"email":req.body.email});
-    if(admin){
-      for( var i in admin){
-        if(passwordHash.verify(req.body.password,admin[i].password)){
-          res.status(200).send(admin);
-        }else{
-          res.status(400).send({err:1,msg:'Invalid Password'});
-        }
-      }
-    }
-      res.send({err:1,msg:'Email is not registered with us..'});
-  });
-
   router.put('/:id', async (req, res) => {
 
     const { error } = validateAgentedit(req.body); 
