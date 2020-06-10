@@ -44,7 +44,7 @@ router.get('/live-vehicle', async (req, res) => {
         path:'model_id',
         select:'-date -updated'
     })
-    .select('-insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    .select('-insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     res.send(procured);
 });
 router.get('/live-vehicle/scooters', async (req, res) => {
@@ -53,7 +53,7 @@ router.get('/live-vehicle/scooters', async (req, res) => {
         path:'model_id',
         select:'-date -updated'
     })
-    .select(' -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    .select(' -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     const x = procured.filter((data)=>{
         return data.model_id.vehicle_type === 'commuters'
     })
@@ -65,7 +65,7 @@ router.get('/live-vehicle/commuters', async (req, res) => {
         path:'model_id',
         select:'-date -updated'
     })
-    .select(' -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    .select(' -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number  -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     const x = procured.filter((data)=>{
         return data.model_id.vehicle_type === 'bikes'
     })
@@ -77,7 +77,7 @@ router.get('/live-vehicle/adventurer', async (req, res) => {
         path:'model_id',
         select:'-date -updated'
     })
-    .select('s -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -manufacture_year -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    .select('s -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     const x = procured.filter((data)=>{
         return data.model_id.vehicle_type === 'adventurer'
     })
@@ -116,6 +116,14 @@ router.get('/total-vehicle-length', async (req, res) => {
 router.get('/similar-vehicle', async (req, res) => {
     const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(50);
     res.send(procured);
+});
+
+router.get('/margin', async (req, res) => {
+    const procured = await Procured.find({"status":5});
+    
+    margin = procured[0].selling_price++
+    
+    res.send({'data':margin});
 });
 
 module.exports = router;
