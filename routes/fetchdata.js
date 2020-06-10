@@ -77,11 +77,16 @@ router.get('/live-vehicle/adventurer', async (req, res) => {
         path:'model_id',
         select:'-date -updated'
     })
-    .select('s -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
+    .select(' -insurance_policy_number -rc_card -documents -imageUpload -vehicle_number  -fines -source -city -pincode -state -address -insurance -b_extract -hypothecation -regn_no -chassis_no -rc_start -rc_end -insurance_start -insurance_end -remark -procured_date -procured_price -refurbishment_received -live_date -date -updated -_id')
     const x = procured.filter((data)=>{
         return data.model_id.vehicle_type === 'adventurer'
     })
     res.send(x);
+    // if(x){
+    //     res.send(x);
+    // }else{
+    //     res.send([])
+    // }
 });
 
 router.get('/booked-vehicle', async (req, res) => {
