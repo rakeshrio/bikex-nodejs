@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 var multer  = require('multer')
 const app = express();
+const _ = require('lodash')
 
 router.get('/procured-vehicle', async (req, res) => {
     const procured = await Procured.find({"status":0}).populate({
@@ -122,6 +123,17 @@ router.get('/similar-vehicle', async (req, res) => {
     const procured = await Procured.find({"vehicle_id": { $ne: req.query.v_id}}).limit(50);
     res.send(procured);
 });
+
+router.get('/top-selling-vehicle', async (req, res) => {
+    const procured = await Procured.find().limit(6);
+    res.send(procured);
+});
+
+router.post('/budget-bikes', async (req, res) => {
+    const procured = await Procured.find({selling_price:{$gt:req.body.min,$lt:req.body.max}}).limit(6);
+    res.send(procured);
+});
+
 
 router.get('/margin', async (req, res) => {
     const procured = await Procured.find({"status":5});
