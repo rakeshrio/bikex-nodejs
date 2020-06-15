@@ -125,7 +125,11 @@ router.get('/similar-vehicle', async (req, res) => {
 });
 
 router.get('/top-selling-vehicle', async (req, res) => {
-    const procured = await Procured.find().limit(6);
+    const procured = await Procured.find()
+    .populate({
+        path:'model_id',
+        select:'-date -updated'
+    }).limit(6);
     res.send(procured);
 });
 
