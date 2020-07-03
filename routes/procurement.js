@@ -225,28 +225,28 @@ router.put('/hypothecation/:id', async (req, res) => {
 router.put('/insurance/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
-    insurance: req.body.form_36
+    insurance: req.body.insurance
   }, { new: false });
   res.send(procured);
 });
 router.put('/b_extract/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
-    b_extract: req.body.form_36
+    b_extract: req.body.b_extract
   }, { new: false });
   res.send(procured);
 });
 router.put('/rc_card/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
-    rc_card: req.body.form_36
+    rc_card: req.body.rc_card
   }, { new: false });
   res.send(procured);
 });
 router.put('/noc/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
-    noc: req.body.form_36
+    noc: req.body.noc
   }, { new: false });
   res.send(procured);
 });
