@@ -159,4 +159,13 @@ router.delete('/:id', async (req, res) => {
   res.send(procured);
 });
 
+router.put('/form_35/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_35: req.body.form_35
+  }, { new: false });
+  
+  res.send(procured);
+});
+
 module.exports = router;
