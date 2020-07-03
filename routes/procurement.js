@@ -199,7 +199,7 @@ router.put('/form_34/:id', async (req, res) => {
   res.send(procured);
 });
 
-router.put('/form_36/:id', async (req, res) => {
+router.put('/form_35/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
     form_35: req.body.form_35
