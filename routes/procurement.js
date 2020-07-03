@@ -159,12 +159,58 @@ router.delete('/:id', async (req, res) => {
   res.send(procured);
 });
 
-router.put('/form_35/:id', async (req, res) => {
+router.put('/form_26/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_26: req.body.form_26
+  }, { new: false });
+  res.send(procured);
+});
+
+router.put('/form_28/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_28: req.body.form_28
+  }, { new: false });
+  res.send(procured);
+});
+
+router.put('/form_29/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_29: req.body.form_29
+  }, { new: false });
+  res.send(procured);
+});
+
+router.put('/form_30/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_30: req.body.form_30
+  }, { new: false });
+  res.send(procured);
+});
+
+router.put('/form_34/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_34: req.body.form_34
+  }, { new: false });
+  res.send(procured);
+});
+
+router.put('/form_36/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
     form_35: req.body.form_35
   }, { new: false });
-  
+  res.send(procured);
+});
+router.put('/form_36/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    form_36: req.body.form_36
+  }, { new: false });
   res.send(procured);
 });
 
