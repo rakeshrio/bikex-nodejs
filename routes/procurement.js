@@ -243,4 +243,11 @@ router.put('/rc_card/:id', async (req, res) => {
   }, { new: false });
   res.send(procured);
 });
+router.put('/noc/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    noc: req.body.form_36
+  }, { new: false });
+  res.send(procured);
+});
 module.exports = router;
