@@ -206,6 +206,7 @@ router.put('/form_35/:id', async (req, res) => {
   }, { new: false });
   res.send(procured);
 });
+
 router.put('/form_36/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
@@ -214,4 +215,32 @@ router.put('/form_36/:id', async (req, res) => {
   res.send(procured);
 });
 
+router.put('/hypothecation/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    hypothecation: req.body.form_36
+  }, { new: false });
+  res.send(procured);
+});
+router.put('/insurance/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    insurance: req.body.form_36
+  }, { new: false });
+  res.send(procured);
+});
+router.put('/b_extract/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    b_extract: req.body.form_36
+  }, { new: false });
+  res.send(procured);
+});
+router.put('/rc_card/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    rc_card: req.body.form_36
+  }, { new: false });
+  res.send(procured);
+});
 module.exports = router;
