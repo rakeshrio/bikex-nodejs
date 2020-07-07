@@ -250,4 +250,11 @@ router.put('/noc/:id', async (req, res) => {
   }, { new: false });
   res.send(procured);
 });
+router.put('/doc_status/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    doc_status: req.body.doc_status
+  }, { new: false });
+  res.send(procured);
+});
 module.exports = router;
