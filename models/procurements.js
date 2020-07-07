@@ -33,6 +33,7 @@ const procurementSchema = new mongoose.Schema({
     rc_end:Date,
     insurance_start:Date,
     insurance_end:Date,
+    doc_status:{type:Number, default:0},
     status:{type:Number, default:0},
     imageUpload:{type:Number, default:0},
     remarks:String,
