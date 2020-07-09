@@ -17,7 +17,7 @@ const docSchema = new mongoose.Schema({
     too_received_date: { type:Date, default:Date.now},
     handed_date: { type:Date, default:Date.now},
 });
-const Documents = mongoose.model('documents', docSchema)
+const Documents = mongoose.model('bikex_docs', docSchema)
 
 function validatedoc(doc) {
     const schema = {
