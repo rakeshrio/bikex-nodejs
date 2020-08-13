@@ -28,6 +28,7 @@ const sendmessage= require('./routes/sendmessage')
 const featuredbike= require('./routes/featuredbike')
 const designation= require('./routes/designation')
 const docs = require('./routes/document');
+const enquiry = require('./routes/enquiries')
 
 
 const app = express();
