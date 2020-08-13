@@ -27,6 +27,7 @@ const banneruploads= require('./routes/banners')
 const sendmessage= require('./routes/sendmessage')
 const featuredbike= require('./routes/featuredbike')
 const designation= require('./routes/designation')
+const enquiry = require('./routes/enquiries');
 
 
 const app = express();
@@ -65,6 +66,8 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/vehicle', megaFile);
   app.use('/api/agent-activity',agentActivity);
   app.use('/api/logged-in', loggedIn);
+  app.use('/api/enquiry', enquiry);
+
 
   app.get('/', (req, res)=>{
     res.send('you are not authorized to view this page')
