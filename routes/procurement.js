@@ -218,7 +218,7 @@ router.put('/form_36/:id', async (req, res) => {
 router.put('/hypothecation/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
-    hypothecation: req.body.form_36
+    hypothecation: req.body.hypothecation
   }, { new: false });
   res.send(procured);
 });
@@ -247,6 +247,13 @@ router.put('/noc/:id', async (req, res) => {
   const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
   {
     noc: req.body.noc
+  }, { new: false });
+  res.send(procured);
+});
+router.put('/doc_status/:id', async (req, res) => {
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+  {
+    doc_status: req.body.doc_status
   }, { new: false });
   res.send(procured);
 });
