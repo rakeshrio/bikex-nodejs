@@ -29,6 +29,7 @@ const featuredbike= require('./routes/featuredbike')
 const designation= require('./routes/designation')
 const docs = require('./routes/document');
 const enquiry = require('./routes/enquiries')
+const squad = require('./routes/squadVoice')
 
 
 const app = express();
@@ -69,6 +70,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/agent-activity',agentActivity);
   app.use('/api/logged-in', loggedIn);
   app.use('/api/enquiry', enquiry);
+  app.use('/api/squadVoice', squad)
 
 
   app.get('/', (req, res)=>{

@@ -94,6 +94,116 @@ router.get('/:id', async (req, res) => {
   res.send(procured);
 });
 
+
+router.post('/addVehicle', async (req, res) => {
+  const procured = await Procured.findOne({'regn_no': req.body.regn_no});
+  if(!procured){
+    const { error } = validate(req.body); 
+          if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+
+          const procured_list = await Procured.find();
+          const id = _.findLast(procured_list, function(n) {
+            return n.vehicle_id;
+          });
+          if(!id){ids = 10001}
+          else{ids = id.vehicle_id}
+
+          let procured = new Procured({
+            vehicle_id : Number(ids)+1,
+            vehicle_number:req.body.vehicle_number,
+            model_id:req.body.model_id,
+            type:req.body.type,
+            manufacture_year:req.body.manufacture_year,
+            color:req.body.color,
+            fines: req.body.fines,
+            source: req.body.source,
+            city: req.body.city,
+            pincode: req.body.pincode,
+            state: req.body.state,
+            address:req.body.address,
+            rc_card: req.body.rc_card,
+            insurance:req.body.insurance,
+            b_extract:req.body.b_extract,
+            hypothecation:req.body.hypothecation,
+            noc:req.body.noc,
+            documents:req.body.documents,
+            regn_no:req.body.regn_no,
+            chassis_no:req.body.chassis_no,
+            insurance_policy_number:req.body.insurance_policy_number,            
+            rc_start:req.body.rc_start,
+            rc_end:req.body.rc_end,
+            insurance_start:req.body.insurance_start,
+            insurance_end:req.body.insurance_end,
+            remarks: req.body.remarks,
+            procured_date: req.body.procured_date,
+            procured_price: req.body.procured_price,
+            registration_cost: req.body.registration_cost,
+            km_reading: req.body.km_reading,
+            selling_price: req.body.selling_price,
+            });           
+        procured =  procured.save();
+        if(err){
+          res.send({'err':1,msg:`Internal Server Error`,'msg':err})
+        }
+          else
+          {
+          res.json({'err':0,'msg':'Procured', 'procured_list':procured})
+          } 
+  }else{
+    res.send({err:1,msg:`Vehicle ${procured.vehicle_id} already has this registration no ${req.body.regn_no}.`})
+  }
+});
+
+router.get('/getVehicles/all', async (req, res) => {
+  const procured = await Procured.find().sort( { date: -1 });
+  res.send(procured);
+});
+
+router.put('/update/:id', async (req, res) => {
+  const { error } = validate(req.body); 
+  if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+  const procured = await Procured.findOneAndUpdate({'vehicle_id': req.params.id},
+    { 
+            vehicle_number:req.body.vehicle_number,
+            model_id:req.body.model_id,
+            type:req.body.type,
+            manufacture_year:req.body.manufacture_year,
+            color:req.body.color,
+            fines: req.body.fines,
+            source: req.body.source,
+            city: req.body.city,
+            pincode: req.body.pincode,
+            state: req.body.state,
+            address:req.body.address,
+            rc_card: req.body.rc_card,
+            insurance:req.body.insurance,
+            b_extract:req.body.b_extract,
+            noc:req.body.noc,
+            hypothecation:req.body.hypothecation,
+            documents:req.body.documents,
+            regn_no:req.body.regn_no,
+            chassis_no:req.body.chassis_no,
+            insurance_policy_number:req.body.insurance_policy_number,            
+            rc_start:req.body.rc_start,
+            rc_end:req.body.rc_end,
+            insurance_start:req.body.insurance_start,
+            insurance_end:req.body.insurance_end,
+            remarks: req.body.remarks,
+            procured_date: req.body.procured_date,
+            procured_price: req.body.procured_price,
+            selling_price: req.body.selling_price,
+            registration_cost: req.body.registration_cost,
+            km_reading: req.body.km_reading,
+
+      updated: req.body.updated
+    }, { new: false });
+
+  if (!procured) return res.status(404).send('The procured with the given ID was not found.');
+  
+  res.send(procured);
+});
+
+
 router.post('/checkregistration', async (req, res) => {
   const procured = await Procured.findOne({'regn_no': req.body.registration});
   if(!procured){

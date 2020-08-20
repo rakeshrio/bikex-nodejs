@@ -147,4 +147,8 @@ router.get('/margin', async (req, res) => {
     res.send({'data':margin});
 });
 
+router.post('/squadVoice/allResponse', async(req, res)=>{
+    const data = req.body
+    res.send(data)
+})
 module.exports = router;
