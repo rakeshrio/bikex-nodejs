@@ -31,9 +31,23 @@ router.post('/', async (req, res) => {
         res.send({response, err, mobile});
       }); 
   }); 
+
   router.get('/', async (req, res) => {
     const enquiry = await Enquiry.find().sort({ date: -1 })
     res.send(enquiry);
+  }); 
+
+  router.put('/:id', async (req, res) => {
+    const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
+    {
+      status:req.body.status
+    },{ new: false });
+
+    if(!enquiry){
+      res.send({"msg":"Given ID not found!"})
+    }else{
+      res.send(enquiry);
+    }
   }); 
 
 

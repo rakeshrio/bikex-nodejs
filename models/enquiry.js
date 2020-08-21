@@ -12,6 +12,7 @@ const enquirySchema = new mongoose.Schema({
     bike_name:String,
     mobile: Number,
     email: String,
+    status:{type:Number, default:0},
     date: { type:Date, default:Date.now},
 });
 const Enquiry = mongoose.model('enquiry', enquirySchema)
