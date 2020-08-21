@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
       }); 
   }); 
   router.get('/', async (req, res) => {
-    const enquiry = await Enquiry.find().sort( { date: -1 })
+    const enquiry = await Enquiry.find().sort({ date: -1 })
     res.send(enquiry);
   }); 
 

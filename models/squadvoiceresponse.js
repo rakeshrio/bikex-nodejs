@@ -3,16 +3,23 @@ const Joi = require('joi');
 
 
 const responseSchema = new mongoose.Schema({
-    message:String,
-    customer_id: String,
-    agent_id: String,
-    agent_username: String,
-    phone: Number,
-    Date: { type:Date, default:Date.now}
+    phone_number:String,
+    lead_id: String,
+    booking_date: Date,
+    unique_payment_link: String,
+    vehicle_interested: String,
+    lead_responses: Array,
+    latest_recording_url:String,
+    campaign_id:String,
+    latest_called_at:Date,
+    lead_outcome:String,
+    processed_at:Date,
+    created_at:Date,
+    Received: { type:Date, default:Date.now}
 });
-const Message = mongoose.model('squadVoiceResponse', responseSchema)
+const Response = mongoose.model('squadVoiceResponse', responseSchema)
 
-function validatemessage(message) {
+function validateresponse(message) {
     const schema = {
       message: Joi.string().min(5).required(),
       customer_id: Joi.string().required(),
@@ -23,5 +30,6 @@ function validatemessage(message) {
   
     return Joi.validate(message, schema);
   }
-module.exports.Message = Message;
-module.exports.validate = validatemessage;
+
+module.exports.Response = Response;
+module.exports.validate = validateresponse;
