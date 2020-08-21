@@ -10,6 +10,7 @@ const responseSchema = new mongoose.Schema({
     vehicle_interested: String,
     lead_responses: Array,
     latest_recording_url:String,
+    lead_email:String,
     campaign_id:String,
     latest_called_at:Date,
     lead_outcome:String,

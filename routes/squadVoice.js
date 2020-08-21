@@ -14,6 +14,7 @@ const router = express.Router();
       phone_number:req.body.phone_number,
       lead_id: req.body.lead_id,
       booking_date: req.body.booking_date,
+      lead_email:req.body.lead_email,
       unique_payment_link: req.body.unique_payment_link,
       vehicle_interested: req.body.vehicle_interested,
       lead_responses: req.body.lead_responses,
