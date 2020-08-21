@@ -33,4 +33,10 @@ const router = express.Router();
       })
   }); 
 
+  router.get('/', async (req, res) => {
+    const response = await Response.find().sort({ Received: -1 })
+    res.send(response);
+  });
+
+
 module.exports = router;
