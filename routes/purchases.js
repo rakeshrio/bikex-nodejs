@@ -45,6 +45,47 @@ router.post('/', async (req, res) => {
        }
       } 
   });
+
+
+  router.post('/offline-sell', async (req, res) => {
+    const { error } = validate(req.body); 
+    if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+    console.log(req.body.vehicle_id)
+    const vehicle = await Procured.find({"vehicle_id":req.body.vehicle_id});
+            for(var i in vehicle){
+              if(vehicle[i].status == 3 || vehicle[i].status == 2){
+                let purchase = new Purchase({
+                  customer_id:req.body.customer_id,
+                  vehicle_id:req.body.vehicle_id,
+                  firstname: req.body.firstname,
+                  lastname: req.body.lastname,
+                  phone: req.body.phone,
+                  email: req.body.email,
+                  amount:req.body.amount,
+                  tefflon: req.body.tefflon,
+                  extended_w: req.body.extended_w,
+                  rsa: req.body.rsa,
+                  comprehensive: req.body.comprehensive,
+                  address1:req.body.address1,
+                  address2:req.body.address2,
+                  town:req.body.town,
+                  mode_of_payment:req.body.mode_of_payment,
+                  image:req.body.image,
+                  model:req.body.model,
+                  state:req.body.state,
+                  postalcode: req.body.postalcode,
+                  payment_status:req.body.payment_status,
+                  source:req.body.source
+              });
+              purchase = await purchase.save();
+              res.send(purchase);
+         }else{
+          res.send({err: 1, "msg":"The vehicle you are looking is unavailable."}); 
+         }
+        } 
+    });
+
+    
   router.get('/', async (req, res) => {
     const purchase = await Purchase.find().sort( { date: -1 });
     res.send(purchase);
