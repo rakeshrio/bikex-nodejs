@@ -109,5 +109,15 @@ router.post('/verifyotp', async (req, res) => {
   });
 });
 
+router.post('/get/customerByNumber', async (req, res) => {
+  const customer = await Customer.findOne({"phone":req.body.phone});
+  if(!customer){
+    res.send({"err":1,"msg":"Customer not found."});
+  }else{
+    res.send({"err":0, "customer":customer});
+  }
+});
+
+
   
 module.exports = router;
