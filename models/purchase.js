@@ -29,6 +29,7 @@ const purchaseSchema = new mongoose.Schema({
     razorpay_order_id:String,
     razorpay_payment_id:String,
     razorpay_signature:String,
+    source:{ type:String, default:'web'},
     payment_status:{ type:Number, default:0},
     date: { type:Date, default:Date.now},
 }); 
@@ -56,6 +57,7 @@ function validatePurchase(purchase) {
     image:Joi.string(),
     mode_of_payment:Joi.string(),
     model:Joi.string(),
+    source:Joi.string(),
     razorpay_payment_id:Joi.string(),
     razorpay_signature:Joi.string(),
     payment_status:Joi.number(),

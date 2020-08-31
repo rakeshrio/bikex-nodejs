@@ -35,7 +35,8 @@ router.post('/', async (req, res) => {
                 model:req.body.model,
                 state:req.body.state,
                 postalcode: req.body.postalcode,
-                payment_status:req.body.payment_status
+                payment_status:req.body.payment_status,
+                source:req.body.source
             });
             purchase = await purchase.save();
             res.send(purchase);

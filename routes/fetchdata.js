@@ -14,16 +14,14 @@ router.get('/procured-vehicle', async (req, res) => {
 });
 
 router.get('/procured-vehicle/:id', async (req, res) => {
-    const procured = await Procured.findOne({"vehicle_id":req.params.id}).populate({
+    const procured = await Procured.find({"vehicle_id":req.params.id}).populate({
         path:'model_id',
         select:''
     });
-    if(!procured){
-        res.status(404).send({"msg":"vehicle not found."});
-    }else{
-        res.send(procured);
-    }
+    res.send(procured);
 });
+
+
 
 router.get('/all-vehicles', async (req, res) => {
     const procured = await Procured.find().populate({

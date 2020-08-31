@@ -261,6 +261,22 @@ router.put('/:id', async (req, res) => {
   
   res.send(procured);
 });
+
+
+router.get('/check_availability/:id', async (req, res) => {
+  const procured = await Procured.findOne({"vehicle_id":req.params.id}).populate({
+      path:'model_id',
+      select:''
+  });
+  if(!procured){
+      res.status(404).send({"msg":"vehicle not found."});
+  }else{
+      res.send(procured);
+  }
+});
+
+
+
 router.delete('/:id', async (req, res) => {
   const procured = await Procured.findByIdAndRemove(req.params.id);
 
