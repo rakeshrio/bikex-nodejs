@@ -13,6 +13,11 @@ var msg91 = require("msg91")("310801AwwK4rO25e0af36eP1","MBIKEX","4");
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
+
+    const customer = await Customer.findOne({"phone":req.body.phone});
+    if(!customer){
+
+
     let customer = new Customer({ 
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -31,6 +36,9 @@ router.post('/', async (req, res) => {
       msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
         res.send({response, err, phone});
       }); 
+    }else{
+      res.status(409).send({"err":1, "msg":"Customer already exists."})
+    }
   }); 
   router.get('/', async (req, res) => {
     const customers = await Customer.find().sort( { date: -1 })

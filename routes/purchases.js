@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
                 tefflon: req.body.tefflon,
                 extended_w: req.body.extended_w,
                 rsa: req.body.rsa,
+                delivery: req.body.delivery,
                 comprehensive: req.body.comprehensive,
                 address1:req.body.address1,
                 address2:req.body.address2,
