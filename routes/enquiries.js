@@ -22,10 +22,10 @@ router.post('/', async (req, res) => {
     var mobile = req.body.mobile
     var username = req.body.name
     bike = req.body.bike_name
-    var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
+    // var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
 
-    msg91.send(supportphone,`${username} have just enquired for ${bike}. You can reach customer at ${mobile}. Team BikeX.`, function(err, response){
-    });
+    // msg91.send(supportphone,`${username} have just enquired for ${bike}. You can reach customer at ${mobile}. Team BikeX.`, function(err, response){
+    // });
 
       msg91.send(mobile,`Hi ${username}, your request for ${bike} has been taken into account. Our executive will reach out to you shortly. We'll love to serve you. Team BikeX.`, function(err, response){
         res.send({response, err, mobile});

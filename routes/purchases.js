@@ -102,7 +102,7 @@ router.post('/', async (req, res) => {
         }, { new: false });
       if (!purchase) return res.status(404).send('The purchase with the given ID was not found.');
       var phone = req.body.phone
-      var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
+      // var supportphone  = ["7602743422","6363623189","9986678450","9742744444"]
       var username = req.body.firstname
       var orderid = req.body.order_id
       var razor_id = req.body.razorpay_payment_id
@@ -110,9 +110,9 @@ router.post('/', async (req, res) => {
         msg91.send(phone,`Hi ${username}, we have received your order. Your order ID is ${orderid} and payment ID is ${razor_id}. Our team will contact you shortly.`, function(err, response){
         }); 
 
-        msg91.send(supportphone,`New order received from ${username}, with order ID ${orderid} and payment ID ${razor_id}. Please reach customer at ${phone}`, function(err, response){
-          res.send({response, err, supportphone, phone});
-        });
+        // msg91.send(supportphone,`New order received from ${username}, with order ID ${orderid} and payment ID ${razor_id}. Please reach customer at ${phone}`, function(err, response){
+        //   res.send({response, err, supportphone, phone});
+        // });
 })
   router.get('/:id', async (req, res) => {
     const purchase = await Purchase.findById(req.params.id);
