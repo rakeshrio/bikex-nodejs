@@ -21,6 +21,8 @@ const router = express.Router();
       latest_recording_url:req.body.latest_recording_url,
       campaign_id:req.body.campaign_id,
       latest_called_at:req.body.latest_called_at,
+      waitlist_vehicle:req.body.waitlist_vehicle,
+      waitlist_date:req.body.waitlist_date,
       lead_outcome:req.body.lead_outcome,
       processed_at:req.body.processed_at,
       created_at:req.body.created_at,

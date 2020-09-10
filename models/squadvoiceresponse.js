@@ -8,6 +8,8 @@ const responseSchema = new mongoose.Schema({
     booking_date: String,
     unique_payment_link: String,
     vehicle_interested: String,
+    waitlist_vehicle:String,
+    waitlist_date:{type : Date},
     lead_responses: Array,
     latest_recording_url:String,
     lead_email:String,
