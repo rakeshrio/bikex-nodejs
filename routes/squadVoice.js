@@ -41,5 +41,19 @@ const router = express.Router();
     res.send(response);
   });
 
+  router.get('/count', async (req, res) => {
+    var response= {}
+    await Response.find({lead_outcome:'Interested'}).then(x=>{
+      response.interested = x.length
+    })
+    await Response.find({lead_outcome:'Not Connected'}).then(y=>{
+      response.Not_Connected = y.length
+    })
+    await Response.find({lead_outcome:'Not Interested'}).then(y=>{
+      response.Not_Interested = y.length
+    })
+    res.send(response);
+  });
+
 
 module.exports = router;
