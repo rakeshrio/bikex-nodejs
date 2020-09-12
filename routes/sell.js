@@ -11,12 +11,12 @@ router.post('/', async (req, res) => {
         model:  req.body.model,
         engine_cc:  req.body.engine_cc,
         manufacture_year:  req.body.manufacture_year,
-        km_run:  req.body.km_run,
-        vehicle_no:  req.body.vehicle_no,
+        km_run:  'NA',
+        vehicle_no:  'NA',
         name:  req.body.name,
         mobile: req.body.mobile,
         city:  req.body.city,
-        state:  req.body.state,
+        state:  'NA',
     });
     sell = await sell.save();
     res.send({"err": 0, "msg": 'We have receive your request, our team will contact you soon'});
