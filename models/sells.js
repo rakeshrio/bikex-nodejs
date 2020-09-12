@@ -7,13 +7,13 @@ const sellSchema = new mongoose.Schema({
     model: String,
     engine_cc: String,
     manufacture_year: String,
-    km_run: String,
-    vehicle_no: String,
+    km_run: {type:String, default:'NA'},
+    vehicle_no: {type:String, default:'NA'},
     name: String,
     seen:{ type:Number, default:0},
     mobile: Number,
     city: String,
-    state: String,
+    state: {type:String, default:'NA'},
     date: { type:Date, default:Date.now},
 });
 const Sell = mongoose.model('sells', sellSchema)
