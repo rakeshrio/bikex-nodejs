@@ -30,7 +30,7 @@ const designation= require('./routes/designation')
 const docs = require('./routes/document');
 const enquiry = require('./routes/enquiries')
 const squad = require('./routes/squadVoice')
-
+const broker = require('./routes/brokers')
 
 const app = express();
 app.use(express.json());
@@ -71,6 +71,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/logged-in', loggedIn);
   app.use('/api/enquiry', enquiry);
   app.use('/api/squadVoice', squad)
+  app.use('/api/broker', broker)
 
 
   app.get('/', (req, res)=>{
