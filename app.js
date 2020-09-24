@@ -31,6 +31,8 @@ const docs = require('./routes/document');
 const enquiry = require('./routes/enquiries')
 const squad = require('./routes/squadVoice')
 const broker = require('./routes/brokers')
+const apiModelList = require('./routes/ApiModelsList');
+const apiList = require('./routes/apiLists');
 
 const app = express();
 app.use(express.json());
@@ -72,6 +74,8 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/enquiry', enquiry);
   app.use('/api/squadVoice', squad)
   app.use('/api/broker', broker)
+  app.use('/api/apiModelList', apiModelList)
+  app.use('/api/apiList', apiList)
 
 
   app.get('/', (req, res)=>{

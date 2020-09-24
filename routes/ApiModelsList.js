@@ -1,4 +1,4 @@
-const {Broker, validate} = require('../models/broker')
+const {Model, validate} = require('../models/ApiModelsLists')
 const express = require('express');
 const router = express.Router();
 
@@ -6,37 +6,33 @@ router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
     
-    const brokerData = await Broker.findOne({'email': req.body.email});
+    const modelData = await Model.findOne({'name': req.body.name});
 
-    if(brokerData){
-        res.status(409).send({'msg':'Email already in use!'})
+    if(modelData){
+        res.status(409).send({'msg':'Name already in use!'})
     }else{
 
-    let broker = new Broker({ 
+    let model = new Model({ 
         name:req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        alternate_phone: req.body.alternate_phone,
-        status:req.body.status,
-        jobs: req.body.jobs,
+        type: req.body.type,
         tags: req.body.tags,
     });
-    broker.save().then(x=>{
+    model.save().then(x=>{
         res.status(201).send({"err": 0, "msg": 'Data entered',"response":x});
-    }).catch(()=>{
-        res.status(500).send({"err": 1, "msg": "Internal Server Down"});
+    }).catch(x=>{
+        res.status(500).send({"err": 1, "msg": x});
     })
     
     }
   });
 
 router.get('/', async (req, res) => {
-    const broker = await Broker.find().sort( { date: -1 });
-    res.status(200).send(broker);
+    const model = await Model.find().sort( { date: -1 });
+    res.status(200).send(model);
   });
 
 router.get('/:id', async (req, res) => {
-    await Broker.find({"_id":req.params.id}).then(x=>{
+    await Model.find({"_id":req.params.id}).then(x=>{
         if(x.length > 0){
             res.status(200).send({"err": 0,"response":x});
         }else{
@@ -49,29 +45,25 @@ router.get('/:id', async (req, res) => {
   });
 
 router.put('/:id', async (req, res) => {
-    const broker = await Broker.findByIdAndUpdate(req.params.id,
+    const model = await Model.findByIdAndUpdate(req.params.id,
         {
             name:req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            alternate_phone: req.body.alternate_phone,
-            status:req.body.status,
-            jobs: req.body.jobs,
+            type: req.body.type,
             tags: req.body.tags,
         },{ new: false })
     
-        if(!broker){
+        if(!model){
             res.status(404).send({"err": 1,"response":`Entry with ID '${req.params.id}' not found.`});
         }
-        res.status(200).send({"err": 0,"response":broker}); 
+        res.status(200).send({"err": 0,"response":model}); 
 })
 
 router.delete('/:id', async (req, res) => {
-    const broker = await Broker.findByIdAndDelete(req.params.id)
-    if(!broker){
+    const model = await Model.findByIdAndDelete(req.params.id)
+    if(!model){
         res.status(404).send({"err": 1,"response":`Entry with ID '${req.params.id}' not found.`});
     }    
-        res.status(200).send({"err": 0,"response":broker});  
+        res.status(200).send({"err": 0,"response":model});  
   });
 
 module.exports = router;
