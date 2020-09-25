@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
         name:req.body.name,
         type: req.body.type,
         tags: req.body.tags,
+        schema_set: req.body.schema_set
     });
     model.save().then(x=>{
         res.status(201).send({"err": 0, "msg": 'Data entered',"response":x});
@@ -50,6 +51,7 @@ router.put('/:id', async (req, res) => {
             name:req.body.name,
             type: req.body.type,
             tags: req.body.tags,
+            schema_set: req.body.schema_set
         },{ new: false })
     
         if(!model){

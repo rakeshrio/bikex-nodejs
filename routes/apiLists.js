@@ -6,11 +6,11 @@ router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send({"err": 1 , "msg" : error.details[0].message});
     
-    const apiData = await ApiList.findOne({'type': req.body.type});
+    // const apiData = await ApiList.findOne({'type': req.body.type});
 
-    if(apiData){
-        res.status(409).send({'msg':'Name already in use!'})
-    }else{
+    // if(apiData){
+    //     res.status(409).send({'msg':'Name already in use!'})
+    // }else{
 
     let apiList = new ApiList({ 
         name:req.body.name,
@@ -19,10 +19,12 @@ router.post('/', async (req, res) => {
         payload: req.body.payload,
         sucess_response: req.body.sucess_response,
         failure_response: req.body.failure_response,
-        schema_set: req.body.schema_set,
         content_type: req.body.content_type,
         Authorization: req.body.Authorization,
         tags: req.body.tags,
+        end_point: req.body.end_point,
+        query_params: req.body.query_params,
+
     });
     apiList.save().then(x=>{
         res.status(201).send({"err": 0, "msg": 'Data entered',"response":x});
@@ -30,7 +32,7 @@ router.post('/', async (req, res) => {
         res.status(500).send({"err": 1, "msg": x});
     })
     
-    }
+    // }
   });
 
 router.get('/', async (req, res) => {
@@ -51,6 +53,7 @@ router.get('/:id', async (req, res) => {
     
   });
 
+  
 router.put('/:id', async (req, res) => {
     const apiList = await ApiList.findByIdAndUpdate(req.params.id,
         {
@@ -60,7 +63,6 @@ router.put('/:id', async (req, res) => {
             payload: req.body.payload,
             sucess_response: req.body.sucess_response,
             failure_response: req.body.failure_response,
-            schema_set: req.body.schema_set,
             content_type: req.body.content_type,
             Authorization: req.body.Authorization,
             tags: req.body.tags,

@@ -74,7 +74,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/enquiry', enquiry);
   app.use('/api/squadVoice', squad)
   app.use('/api/broker', broker)
-  app.use('/api/apiModelList', apiModelList)
+  app.use('/api/apiModel', apiModelList)
   app.use('/api/apiList', apiList)
 
 
