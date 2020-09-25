@@ -67,6 +67,18 @@ router.post('/', async (req, res) => {
       }else{
         res.send(enquiry);
       }
+    }else{
+      const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+      },{ new: false });
+
+      if(!enquiry){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(enquiry);
+      }
     }
 
     
@@ -79,25 +91,12 @@ router.post('/', async (req, res) => {
     msg91.send(phone,`Hi ${username}, Your BikeX account has been created successfully. You're all set! Go and explore our BikeX catalog at bikex.in. You are going to love it!`, function(err, response){
       res.send({response, err, phone});
     });
-
-//   msg91.getBalance("4", function(err, msgCount){
-//     console.log(err);
-//     console.log(msgCount);
-// });
-
   });
 
-  router.get('/:id', async (req, res) => {
-    const customers = await Customer.findById(req.params.id)
-    .select("-password");
-    res.send(customers);
+  router.post('/fetch/entrybydate', async (req, res) => {
+    const enquiry = await Enquiry.find({"next_action_date":req.body.next_action_date});
+    res.send(enquiry);
   });
- 
-  router.get('/fetch/total-customer-length', async (req, res) => {
-    const customer = await Customer.find();
-    var length = customer.length
-    res.send({"total":length});
-});
  
   router.post('/validate', async (req, res) => {
 

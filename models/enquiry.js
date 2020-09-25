@@ -14,7 +14,7 @@ const enquirySchema = new mongoose.Schema({
     email: String,
     status:{type:Number, default:0},
     comment:{type:String, default:'No comment yet'},
-    next_action_date: { type:Date, default:Date.now},
+    next_action_date: { type:String, default:'NA'},
     walkin_status:{type:Boolean, default:false},
     sold_status:{type:Boolean, default:false},
     walkin_comment:{type:String, default:'No comment yet'},
