@@ -13,6 +13,7 @@ const enquirySchema = new mongoose.Schema({
     mobile: Number,
     email: String,
     status:{type:Number, default:0},
+    comment:{type:String, default:'No comment yet'},
     date: { type:Date, default:Date.now},
 });
 const Enquiry = mongoose.model('enquiry', enquirySchema)
@@ -23,6 +24,7 @@ function validateEnquiry(enquiry) {
       bike_name: Joi.string().min(1).max(50).required(),
       mobile: Joi.number().min(10).required(),
       email: Joi.string().min(5).max(100).required(),
+      comment: Joi.string(),
     };
   
     return Joi.validate(enquiry, schema);

@@ -40,7 +40,8 @@ router.post('/', async (req, res) => {
   router.put('/:id', async (req, res) => {
     const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
     {
-      status:req.body.status
+      status:req.body.status,
+      comment: req.body.comment
     },{ new: false });
 
     if(!enquiry){
