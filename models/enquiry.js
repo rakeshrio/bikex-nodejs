@@ -14,6 +14,10 @@ const enquirySchema = new mongoose.Schema({
     email: String,
     status:{type:Number, default:0},
     comment:{type:String, default:'No comment yet'},
+    next_action_date: { type:Date, default:Date.now},
+    walkin_status:{type:Boolean, default:false},
+    sold_status:{type:Boolean, default:false},
+    walkin_comment:{type:String, default:'No comment yet'},
     date: { type:Date, default:Date.now},
 });
 const Enquiry = mongoose.model('enquiry', enquirySchema)
@@ -25,6 +29,10 @@ function validateEnquiry(enquiry) {
       mobile: Joi.number().min(10).required(),
       email: Joi.string().min(5).max(100).required(),
       comment: Joi.string(),
+      next_action_date:Joi.date(),
+      walkin_status:Joi.boolean(),
+      sold_status:Joi.boolean(),
+      walkin_comment: Joi.string()
     };
   
     return Joi.validate(enquiry, schema);

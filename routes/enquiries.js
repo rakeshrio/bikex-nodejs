@@ -38,17 +38,38 @@ router.post('/', async (req, res) => {
   }); 
 
   router.put('/:id', async (req, res) => {
-    const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
-    {
-      status:req.body.status,
-      comment: req.body.comment
-    },{ new: false });
 
-    if(!enquiry){
-      res.send({"msg":"Given ID not found!"})
-    }else{
-      res.send(enquiry);
+    if(req.body.status == 1){
+      const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+        next_action_date:req.body.next_action_date,
+        walkin_status:req.body.walkin_status,
+        walkin_comment:req.body.walkin_comment
+      },{ new: false });
+
+      if(!enquiry){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(enquiry);
+      }
+    }else if(req.body.status == 2){
+      const enquiry = await Enquiry.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+        sold_status:req.body.sold_status,
+      },{ new: false });
+
+      if(!enquiry){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(enquiry);
+      }
     }
+
+    
   }); 
 
 
