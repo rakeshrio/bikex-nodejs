@@ -38,4 +38,57 @@ router.post('/', async (req, res) => {
     if (!sell) return res.status(404).send('The sell with the given ID was not found.');
     res.send(sell);
   })
+
+  router.put('/changstatus/:id', async (req, res) => {
+
+    if(req.body.status == 1){
+      const sell = await Sell.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+        call_status: req.body.call_status,
+        next_call_date:req.body.next_call_date,
+        expected_price:req.body.expected_price,
+        offered_price:req.body.offered_price,
+        inspection:req.body.inspection
+      },{ new: false });
+
+      if(!sell){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(sell);
+      }
+    }else if(req.body.status == 2){
+      const sell = await Sell.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+        procured_status:req.body.procured_status,
+      },{ new: false });
+
+      if(!sell){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(sell);
+      }
+    }else{
+      const sell = await Sell.findOneAndUpdate({"_id":req.params.id},
+      {
+        status:req.body.status,
+        comment: req.body.comment,
+      },{ new: false });
+
+      if(!sell){
+        res.send({"msg":"Given ID not found!"})
+      }else{
+        res.send(sell);
+      }
+    }
+
+    
+  }); 
+
+
+
+
 module.exports = router;

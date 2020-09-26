@@ -11,6 +11,12 @@ const sellSchema = new mongoose.Schema({
     seen:{ type:Number, default:0},
     status:{ type:Number, default:0},
     comment:{type:String, default:'No comment yet'},
+    next_call_date: { type:String, default:'NA'},
+    call_status:{type:Boolean, default:false},
+    expected_price: { type:String, default:'NA'},
+    offered_price: { type:String, default:'NA'},
+    inspection:{type:Boolean, default:false},
+    procured_status:{type:Boolean, default:false},
     mobile: Number,
     city: String,
     date: { type:Date, default:Date.now},
@@ -26,6 +32,14 @@ function validateSell(sell) {
     name: Joi.string().min(1).max(50).required(),
     mobile: Joi.number().required(),
     city: Joi.string().min(1).max(50).required(),
+    status:Joi.number(),
+    comment:Joi.string(),
+    next_call_date: Joi.string(),
+    call_status:Joi.boolean(),
+    expected_price: Joi.string(),
+    offered_price: Joi.string(),
+    inspection:Joi.boolean(),
+    procured_status:Joi.boolean(),
     };
   
     return Joi.validate(sell, schema);
