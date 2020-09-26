@@ -9,6 +9,8 @@ const sellSchema = new mongoose.Schema({
     manufacture_year: String,
     name: String,
     seen:{ type:Number, default:0},
+    status:{ type:Number, default:0},
+    comment:{type:String, default:'No comment yet'},
     mobile: Number,
     city: String,
     date: { type:Date, default:Date.now},
