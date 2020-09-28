@@ -24,7 +24,6 @@ function validateBroker(broker) {
     phone: Joi.number().required(),
     alternate_phone: Joi.number(),
     status: Joi.number(),
-    jobs: Joi.string().min(1).max(50).required(),
     tags: Joi.string(),
     does_drc: Joi.boolean(),
     does_to: Joi.boolean(),
