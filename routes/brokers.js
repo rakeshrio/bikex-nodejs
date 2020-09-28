@@ -18,7 +18,10 @@ router.post('/', async (req, res) => {
         phone: req.body.phone,
         alternate_phone: req.body.alternate_phone,
         status:req.body.status,
-        jobs: req.body.jobs,
+        charges: req.body.charges,
+        does_drc: req.body.does_drc,
+        does_to: req.body.does_to,
+        does_hc: req.body.does_hc,
         tags: req.body.tags,
     });
     broker.save().then(x=>{
@@ -51,13 +54,15 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const broker = await Broker.findByIdAndUpdate(req.params.id,
         {
-            name:req.body.name,
+            name:req.body.name, 
             email: req.body.email,
             phone: req.body.phone,
             alternate_phone: req.body.alternate_phone,
             status:req.body.status,
-            jobs: req.body.jobs,
-            tags: req.body.tags,
+            charges: req.body.charges,
+            does_drc: req.body.does_drc,
+            does_to: req.body.does_to,
+            does_hc: req.body.does_hc,
         },{ new: false })
     
         if(!broker){

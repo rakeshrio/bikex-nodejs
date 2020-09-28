@@ -76,6 +76,7 @@ router.post('/', async (req, res) => {
       {
         status:req.body.status,
         comment: req.body.comment,
+        not_interested_reason: req.body.not_interested_reason
       },{ new: false });
 
       if(!sell){

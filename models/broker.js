@@ -8,8 +8,10 @@ const brokerSchema = new mongoose.Schema({
     phone: Number,
     alternate_phone: Number,
     status:{ type:Number, default:0},
-    jobs: String,
-    tags: String,
+    does_drc: { type:Boolean, default:false},
+    does_to: { type:Boolean, default:false},
+    does_hc: { type:Boolean, default:false},
+    charges: {type:Number, default: 0},
     createdAt: { type:Date, default:Date.now},
     updatedAt: { type:Date, default:Date.now}
 });
@@ -24,6 +26,10 @@ function validateBroker(broker) {
     status: Joi.number(),
     jobs: Joi.string().min(1).max(50).required(),
     tags: Joi.string(),
+    does_drc: Joi.boolean(),
+    does_to: Joi.boolean(),
+    does_hc: Joi.boolean(),
+    charges: Joi.number(),
     };
   
     return Joi.validate(broker, schema);
