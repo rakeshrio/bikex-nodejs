@@ -19,6 +19,7 @@ const enquirySchema = new mongoose.Schema({
     sold_status:{type:Boolean, default:false},
     walkin_comment:{type:String, default:'No comment yet'},
     date: { type:Date, default:Date.now},
+    source:{type:String, default:'BikeX'},
 });
 const Enquiry = mongoose.model('enquiry', enquirySchema)
 
@@ -32,7 +33,8 @@ function validateEnquiry(enquiry) {
       next_action_date:Joi.date(),
       walkin_status:Joi.boolean(),
       sold_status:Joi.boolean(),
-      walkin_comment: Joi.string()
+      walkin_comment: Joi.string(),
+      source: Joi.string()
     };
   
     return Joi.validate(enquiry, schema);
