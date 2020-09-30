@@ -1,4 +1,6 @@
 const {Procured, validate} = require('../models/procurements')
+const {vehicleDocs} = require('../models/vehicle_docs')
+
 const express = require('express');
 const router = express.Router();
 var multer  = require('multer')
@@ -11,6 +13,28 @@ router.get('/procured-vehicle', async (req, res) => {
         select:''
     });
     res.send(procured);
+});
+
+router.get('/:id', async (req, res) => {
+    
+    await Procured.find({"vehicle_id":req.params.id}).populate({
+        path:'model_id',
+        select:'' 
+    }).then((x)=>{
+         vehicleDocs.find({"vehicle_number":req.params.id}).select('-_id -__v -received -vehicle_number -images').then(y=>{
+            item = {}
+            item.data = x[0]
+            images = []
+            for (var i in y){
+                images.push(y[i])
+            }
+            item ["image"] = images
+            item ["status"] = x[0].status;
+            res.send(item);
+        })
+        
+    })
+    
 });
 
 router.get('/procured-vehicle/:id', async (req, res) => {

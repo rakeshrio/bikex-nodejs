@@ -19,6 +19,7 @@ const sellSchema = new mongoose.Schema({
     procured_status:{type:Boolean, default:false},
     mobile: Number,
     city: String,
+    source: { type:String, default:'BikeX'},
     date: { type:Date, default:Date.now},
 });
 const Sell = mongoose.model('sells', sellSchema)
@@ -40,6 +41,7 @@ function validateSell(sell) {
     offered_price: Joi.string(),
     inspection:Joi.boolean(),
     procured_status:Joi.boolean(),
+    source:Joi.string(),
     };
   
     return Joi.validate(sell, schema);

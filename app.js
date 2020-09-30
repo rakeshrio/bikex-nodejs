@@ -33,6 +33,7 @@ const squad = require('./routes/squadVoice')
 const broker = require('./routes/brokers')
 const apiModelList = require('./routes/ApiModelsList');
 const apiList = require('./routes/apiLists');
+const vehicle_doc = require('./routes/vehicle_doc');
 
 const app = express();
 app.use(express.json());
@@ -76,6 +77,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/broker', broker)
   app.use('/api/apiModel', apiModelList)
   app.use('/api/apiList', apiList)
+  app.use('/api/upload-docs', vehicle_doc)
 
 
   app.get('/', (req, res)=>{
