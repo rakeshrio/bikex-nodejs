@@ -2,6 +2,8 @@ const express = require('express');
 const {Enquiry, validate} = require('../models/enquiry')
 const router = express.Router();
 var multer  = require('multer')
+const _ = require('lodash')
+
 
 const SendOtp = require('sendotp');
 const sendOtp = new SendOtp('310801AwwK4rO25e0af36eP1', 'OTP for your order is {{otp}}, please do not share it with anybody.');
@@ -36,7 +38,24 @@ router.post('/', async (req, res) => {
   router.get('/', async (req, res) => {
     const enquiry = await Enquiry.find().sort({ date: -1 })
     res.send(enquiry);
-  }); 
+  });  
+
+  router.get('/fetch/leadcount', async (req, res) => {
+    Enquiry.find().sort( { date: -1 }).then(x=>{
+      var uniq = _.uniqBy(x, 'source');
+      response=[]
+      for (var i in uniq){
+        var item ={}    
+        var entries = x.filter(y=>{
+            return y.source == uniq[i].source
+        })
+        item.source = uniq[i].source
+        item.count = entries.length
+        response.push(item)
+      }
+      res.send(response);
+    })   
+  });
 
   router.put('/:id', async (req, res) => {
 

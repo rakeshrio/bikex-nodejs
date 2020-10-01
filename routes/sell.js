@@ -1,6 +1,7 @@
 const {Sell, validate} = require('../models/sells')
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash')
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
@@ -21,8 +22,25 @@ router.post('/', async (req, res) => {
   });
 
   router.get('/', async (req, res) => {
-    const sell = await Sell.find().sort( { date: -1 });
+    const sell = await Sell.find({"status" : !10}).sort( { date: -1 });
     res.send(sell);
+  });
+
+  router.get('/fetch/leadcount', async (req, res) => {
+    Sell.find().sort( { date: -1 }).then(x=>{
+      var uniq = _.uniqBy(x, 'source');
+      response=[]
+      for (var i in uniq){
+        var item ={}    
+        var entries = x.filter(y=>{
+            return y.source == uniq[i].source
+        })
+        item.source = uniq[i].source
+        item.count = entries.length
+        response.push(item)
+      }
+      res.send(response);
+    })   
   });
 
   router.get('/notseen', async (req, res) => {
