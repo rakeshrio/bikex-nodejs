@@ -34,6 +34,7 @@ const broker = require('./routes/brokers')
 const apiModelList = require('./routes/ApiModelsList');
 const apiList = require('./routes/apiLists');
 const vehicle_doc = require('./routes/vehicle_doc');
+const broker_task = require('./routes/broker_task');
 
 const app = express();
 app.use(express.json());
@@ -78,6 +79,7 @@ mongoose.connect('mongodb+srv://bikex:bikex2019@bikex-g6pzj.gcp.mongodb.net/test
   app.use('/api/apiModel', apiModelList)
   app.use('/api/apiList', apiList)
   app.use('/api/upload-docs', vehicle_doc)
+  app.use('/api/broker-task', broker_task)
 
 
   app.get('/', (req, res)=>{
