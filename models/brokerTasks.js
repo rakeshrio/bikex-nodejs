@@ -31,6 +31,7 @@ function validatebrokerTask(broker) {
     assigned_by: Joi.string(),
     vehicle_number: Joi.string(),
     comment: Joi.string(),
+    status:Joi.number(),
     form_28: Joi.boolean(),
     form_29: Joi.boolean(),
     form_30: Joi.boolean(),
