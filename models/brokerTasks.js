@@ -39,7 +39,7 @@ function validatebrokerTask(broker) {
     form_35: Joi.boolean(),
     b_extract: Joi.boolean(),
     hypothecation: Joi.boolean(),
-    noc: Joi.boolean(),
+    noc: Joi.boolean(), 
     };
   
     return Joi.validate(broker, schema);
