@@ -2,6 +2,7 @@ const {Sell, validate} = require('../models/sells')
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash')
+var moment = require('moment')
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
@@ -29,7 +30,9 @@ router.post('/', async (req, res) => {
   router.get('/fetch/leadcount', async (req, res) => {
     Sell.find().sort( { date: -1 }).then(x=>{
       var uniq = _.uniqBy(x, 'source');
+
       response=[]
+      
       for (var i in uniq){
         var item ={}    
         var entries = x.filter(y=>{
@@ -37,8 +40,15 @@ router.post('/', async (req, res) => {
         })
         item.source = uniq[i].source
         item.count = entries.length
-        response.push(item)
+        response.push(item) //First Push
       }
+
+      var today = x.filter(y=>{
+          return moment(y.date).format('MM-DD-YYYY') == moment().format('MM-DD-YYYY')
+      })
+
+      response.push({"source": "all","count":x.length},{"source": "today","count":today.length}) //Ready to send
+      
       res.send(response);
     })   
   });
