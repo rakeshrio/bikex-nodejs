@@ -2,6 +2,7 @@ const {Sell, validate} = require('../models/sells')
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash')
+var moment = require('moment')
 
 router.post('/', async (req, res) => {
     const { error } = validate(req.body); 
@@ -16,7 +17,8 @@ router.post('/', async (req, res) => {
         pincode: req.body.pincode,
         mobile: req.body.mobile,
         city:  req.body.city,
-        source: req.body.source
+        source: req.body.source,
+        pincode: req.body.pincode
     });
     sell = await sell.save();
     res.send({"err": 0, "msg": 'We have receive your request, our team will contact you soon'});
@@ -30,7 +32,9 @@ router.post('/', async (req, res) => {
   router.get('/fetch/leadcount', async (req, res) => {
     Sell.find().sort( { date: -1 }).then(x=>{
       var uniq = _.uniqBy(x, 'source');
+
       response=[]
+      
       for (var i in uniq){
         var item ={}    
         var entries = x.filter(y=>{
@@ -38,8 +42,15 @@ router.post('/', async (req, res) => {
         })
         item.source = uniq[i].source
         item.count = entries.length
-        response.push(item)
+        response.push(item) //First Push
       }
+
+      var today = x.filter(y=>{
+          return moment(y.date).format('MM-DD-YYYY') == moment().format('MM-DD-YYYY')
+      })
+
+      response.push({"source": "all","count":x.length},{"source": "In 24hrs","count":today.length}) //Ready to send
+      
       res.send(response);
     })   
   });
