@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         engine_cc:  req.body.engine_cc,
         manufacture_year:  req.body.manufacture_year,
         name:  req.body.name,
-        pincode: req.body.pincode,
+        // pincode: req.body.pincode,
         mobile: req.body.mobile,
         city:  req.body.city,
         source: req.body.source,
