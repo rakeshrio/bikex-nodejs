@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
           return moment(y.date).format('MM-DD-YYYY') == moment().format('MM-DD-YYYY')
       })
 
-      response.push({"source": "all","count":x.length},{"source": "today","count":today.length}) //Ready to send
+      response.push({"source": "all","count":x.length},{"source": "In 24hrs","count":today.length}) //Ready to send
       
       res.send(response);
     })   
