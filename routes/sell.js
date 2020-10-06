@@ -16,7 +16,8 @@ router.post('/', async (req, res) => {
         name:  req.body.name,
         mobile: req.body.mobile,
         city:  req.body.city,
-        source: req.body.source
+        source: req.body.source,
+        pincode: req.body.pincode
     });
     sell = await sell.save();
     res.send({"err": 0, "msg": 'We have receive your request, our team will contact you soon'});
