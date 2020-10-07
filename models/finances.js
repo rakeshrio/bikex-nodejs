@@ -12,6 +12,9 @@ const financeSchema = new mongoose.Schema({
     annual_income: Number,
     vehicle: String,
     date: { type:Date, default:Date.now},
+    flag: Number,
+    comment: String,
+    follow_up_date: String
 });
 const Finance = mongoose.model('finance', financeSchema)
 

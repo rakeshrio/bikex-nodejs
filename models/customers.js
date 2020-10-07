@@ -16,6 +16,9 @@ const customerSchema = new mongoose.Schema({
     phone_verified: Boolean,
     email_verified:Boolean,
     date: { type:Date, default:Date.now},
+    flag: Number,
+    comment: String,
+    follow_up_date: String
 });
 const Customer = mongoose.model('customers', customerSchema)
 

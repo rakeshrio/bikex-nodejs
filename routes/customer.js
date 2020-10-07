@@ -125,6 +125,32 @@ router.post('/get/customerByNumber', async (req, res) => {
     res.send({"err":0, "customer":customer});
   }
 });
+  // update customes data(flag , comment , follow_up_date) by _id
+router.put('/:id' , async (req , res) => {
+  let obj = {
+    flag           : req.body.flag,
+    comment        : req.body.comment,
+    follow_up_date : req.body.follow_up_date
+  }
+
+  if(obj.flag === "" || obj.flag == undefined){
+    return res.send({"err" : "1" , "msg" : "flag is required"})
+  }
+
+  let update_customer = await Customer.findByIdAndUpdate({_id : req.params.id} , obj , {new : false})
+  if(!update_customer){
+    return res.send({"err" : "1" , "msg" : "Given ID not found"})
+  }else{
+    return res.send(update_customer)
+  }
+})
+ // filter customes by follow_up_date
+router.post('/filterby/date' , async (req, res) => {
+  let customers = await Customer.find({follow_up_date : req.body.date})
+  return res.send(customers)
+})
+
+
 
 
   
